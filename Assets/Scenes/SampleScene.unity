@@ -2142,6 +2142,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7422066654307117902, guid: 0dc56e53a276d5b48981142b02736433,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7422066654307117902, guid: 0dc56e53a276d5b48981142b02736433,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 83deae5e49d76c144b5c2fb12047a516, type: 2}
     - target: {fileID: 8596059494287446049, guid: 0dc56e53a276d5b48981142b02736433,
         type: 3}
       propertyPath: m_RootOrder

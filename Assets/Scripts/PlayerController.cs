@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour
     void MovePlayer()
     {
         horizontalInput = Input.GetAxis("Horizontal") * movementSpeed;
-        playerRigidbody.velocity = new Vector3(horizontalInput, 0, forwardVelocity);
+        playerRigidbody.velocity = new Vector3(horizontalInput, -0.1f , forwardVelocity);
     }
 
     void CheckPosition()
@@ -53,6 +53,13 @@ public class PlayerController : MonoBehaviour
         {
             transform.localScale = transform.localScale * 1.2f;
             Destroy(other.gameObject);
+        }
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.CompareTag("Ground"))
+        {
+            playerRigidbody.useGravity = false;
         }
     }
 }

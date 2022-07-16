@@ -12,23 +12,48 @@ public class PlayerController : MonoBehaviour
 
     private float xRange = 4;
 
+    [SerializeField] GameObject Goal;
+    [SerializeField] float shotPower;
+    private float shotPosZ;
+    public bool isPositionOkay;
+    public bool isShooted;
     // Start is called before the first frame update
     void Start()
     { 
         playerRigidbody = GetComponent<Rigidbody>();
+        shotPosZ = Goal.transform.position.z - 15;
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        MovePlayer();
+        if(transform.position.z < shotPosZ)
+        {
+            MovePlayer();
+        }
+        else if (transform.position.z >= shotPosZ)
+        {
+            if(!isShooted)
+            {
+                playerRigidbody.velocity = Vector3.zero;
+                isPositionOkay = true;
+            }
+        }
+        if(isPositionOkay)
+        {
+            if(Input.GetKeyDown(KeyCode.Space))
+            {
+                playerRigidbody.AddForce(Vector3.forward * shotPower, ForceMode.Impulse);
+                isShooted = true;
+            }
+        }
         CheckPosition();
     }
 
     void MovePlayer()
     {
-        horizontalInput = Input.GetAxis("Horizontal") * movementSpeed;
-        playerRigidbody.velocity = new Vector3(horizontalInput, -0.1f , forwardVelocity);
+            horizontalInput = Input.GetAxis("Horizontal") * movementSpeed;
+            playerRigidbody.velocity = new Vector3(horizontalInput, playerRigidbody.velocity.y , forwardVelocity);
     }
 
     void CheckPosition()
@@ -53,13 +78,6 @@ public class PlayerController : MonoBehaviour
         {
             transform.localScale = transform.localScale * 1.2f;
             Destroy(other.gameObject);
-        }
-    }
-    private void OnCollisionEnter(Collision collision)
-    {
-        if(collision.gameObject.CompareTag("Ground"))
-        {
-            playerRigidbody.useGravity = false;
         }
     }
 }

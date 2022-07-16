@@ -4,17 +4,24 @@ using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
 {
-    private Vector3 offset;
+    private Vector3 offset = new Vector3(0, 8.5f, -9.0f);
+    private Vector3 offset2 = new Vector3(0, 2.4f, -3.0f);
+    private PlayerController playerController;
     [SerializeField] GameObject player;
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        offset = transform.position;
+        playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
     }
-
     // Update is called once per frame
     void LateUpdate()
     {
-        transform.position = offset + player.transform.position; 
+        if (!playerController.isShooted)
+        {
+            transform.position = offset + player.transform.position;
+            if (playerController.isPositionOkay)
+            {
+                offset = Vector3.Lerp(offset, offset2, 0.01f);
+            }
+        }
     }
 }

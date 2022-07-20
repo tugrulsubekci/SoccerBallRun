@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
     public bool isShooted;
 
     private GameManager gameManager;
+    private Vector3 _direction;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,7 +30,7 @@ public class PlayerController : MonoBehaviour
     }
 
     // Update is called once per frame
-    /*void FixedUpdate()
+    void FixedUpdate()
     {
         if (transform.position.z < shotPosZ)
         {
@@ -45,26 +46,30 @@ public class PlayerController : MonoBehaviour
         }
 
         CheckPosition();
-    }*/
+    }
 
     private void Update()
     {
-        if (transform.position.z < shotPosZ)
+        if (Input.GetMouseButton(0))
         {
-            MoveePlayer();
-        }
-        else if (transform.position.z >= shotPosZ)
-        {
-            if (!isShooted)
+            if (Input.mousePosition.x > Camera.main.WorldToScreenPoint(transform.position).x)
             {
-                playerRigidbody.velocity = Vector3.zero;
-                isPositionOkay = true;
+                _direction = Vector3.right;
+            }
+            else if (Input.mousePosition.x < Camera.main.WorldToScreenPoint(transform.position).x)
+            {
+                _direction = Vector3.left;
+            }
+            else
+            {
+                _direction = Vector3.zero;
             }
         }
+        else
+        {
+            _direction = Vector3.zero;
+        }
 
-        CheckPosition();
-        Debug.Log("Mouse Position: " + Input.mousePosition.x);
-        Debug.Log("Ball Position: " + Camera.main.WorldToScreenPoint(transform.position).x);
         if (isPositionOkay && !isShooted)
         {
             if (Input.GetKeyDown(KeyCode.Space))
@@ -77,7 +82,7 @@ public class PlayerController : MonoBehaviour
 
     void MovePlayer()
     {
-        if(gameManager.isGameStarted)
+        if (gameManager.isGameStarted)
         {
             horizontalInput = Input.GetAxis("Horizontal") * movementSpeed;
             playerRigidbody.velocity = new Vector3(horizontalInput, playerRigidbody.velocity.y, forwardVelocity);
@@ -88,31 +93,8 @@ public class PlayerController : MonoBehaviour
     {
         if (gameManager.isGameStarted)
         {
-            if(Input.GetMouseButton(0))
-            {
-                if(Input.mousePosition.x > Camera.main.WorldToScreenPoint(transform.position).x)
-                {
-                    if(horizontalInput < 5)
-                    {
-                        horizontalInput += 1 * Time.deltaTime * movementSpeed;
-                    }
-                    
-                }
-                else if (Input.mousePosition.x < Camera.main.WorldToScreenPoint(transform.position).x)
-                {
-                    if(horizontalInput > -5)
-                    {
-                        horizontalInput -= 1 * Time.deltaTime * movementSpeed;
-                    }
-                    
-                }
-                playerRigidbody.velocity = new Vector3(horizontalInput, playerRigidbody.velocity.y, forwardVelocity);
-            }
-            else
-            {
-                horizontalInput = 0;
-                playerRigidbody.velocity = new Vector3(horizontalInput, playerRigidbody.velocity.y, forwardVelocity);
-            }
+            horizontalInput = _direction.x * movementSpeed;
+            playerRigidbody.velocity = new Vector3(horizontalInput, playerRigidbody.velocity.y, forwardVelocity);
         }
     }
 

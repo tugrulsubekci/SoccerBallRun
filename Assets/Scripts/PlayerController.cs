@@ -21,6 +21,8 @@ public class PlayerController : MonoBehaviour
 
     private GameManager gameManager;
     private Vector3 _direction;
+
+    [SerializeField] ParticleSystem explosionParticle;
     // Start is called before the first frame update
     void Start()
     {
@@ -113,7 +115,7 @@ public class PlayerController : MonoBehaviour
     {
         if (other.CompareTag("SmallBall"))
         {
-            transform.localScale = transform.localScale * 0.8f;
+            transform.localScale = transform.localScale / 1.2f;
             other.gameObject.GetComponent<PanelAnimation>().isDestroyed = true;
             Destroy(other.gameObject, 0.6f);
         }
@@ -122,6 +124,14 @@ public class PlayerController : MonoBehaviour
             transform.localScale = transform.localScale * 1.2f;
             other.gameObject.GetComponent<PanelAnimation>().isDestroyed = true;
             Destroy(other.gameObject, 0.6f);
+        }
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.CompareTag("Obstacle"))
+        {
+            Destroy(gameObject);
+            Instantiate(explosionParticle,transform.position, transform.rotation);
         }
     }
 }

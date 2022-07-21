@@ -8,6 +8,8 @@ TagManager:
   - BigBall
   - Ground
   - Jump
+  - Goal
+  - Obstacle
   layers:
   - Default
   - TransparentFX

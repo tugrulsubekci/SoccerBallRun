@@ -5,19 +5,19 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public bool isGameStarted;
-    [SerializeField] GameObject instructionalCanvas;
-    [SerializeField] GameObject menuCanvas;
+    [SerializeField] GameObject instructionalObjects;
+    [SerializeField] GameObject menuObjects;
     private void Update()
     {
         if(isGameStarted && Input.GetMouseButtonDown(0))
         {
-            instructionalCanvas.SetActive(false);
+            instructionalObjects.SetActive(false);
         }
     }
     public void StartGame()
     {
         isGameStarted = true;
-        instructionalCanvas.SetActive(true);
-        menuCanvas.SetActive(false);
+        instructionalObjects.SetActive(true);
+        menuObjects.SetActive(false);
     }
 }

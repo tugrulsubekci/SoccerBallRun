@@ -15,7 +15,7 @@ public class CameraFollow : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
-        if (!playerController.isShooted)
+        if (!playerController.isShooted && player.gameObject != null)
         {
             transform.position = offset + player.transform.position;
             if (playerController.isPositionOkay)

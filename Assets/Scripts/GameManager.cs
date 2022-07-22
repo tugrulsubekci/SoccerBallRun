@@ -1,23 +1,33 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
     public bool isGameStarted;
-    [SerializeField] GameObject instructionalObjects;
-    [SerializeField] GameObject menuObjects;
-    private void Update()
+    public bool gameOver;
+    public bool isLevelCompleted;
+
+    public int coins;
+
+    [SerializeField] TextMeshProUGUI coinText;
+    [SerializeField] GameObject gameOverPanel;
+    [SerializeField] GameObject levelCompletedPanel;
+    public void AddCoin(int amount)
     {
-        if(isGameStarted && Input.GetMouseButtonDown(0))
-        {
-            instructionalObjects.SetActive(false);
-        }
+        coins += amount;
+        coinText.text = coins.ToString();
     }
-    public void StartGame()
+    public void GameOver()
     {
-        isGameStarted = true;
-        instructionalObjects.SetActive(true);
-        menuObjects.SetActive(false);
+        gameOver = true;
+        gameOverPanel.SetActive(true);
+    }
+
+    public void LevelCompleted()
+    {
+        isLevelCompleted = true;
+        levelCompletedPanel.SetActive(true);
     }
 }

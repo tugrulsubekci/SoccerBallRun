@@ -21,7 +21,6 @@ public class GoalController : MonoBehaviour
         {
             Move();
         }
-
     }
     private void Move()
     {

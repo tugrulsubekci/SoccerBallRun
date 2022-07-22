@@ -78,6 +78,7 @@ public class PlayerController : MonoBehaviour
             {
                 playerRigidbody.AddForce(Vector3.forward * shotPower, ForceMode.Impulse);
                 isShooted = true;
+                StartCoroutine(CheckShoot());
             }
         }
     }
@@ -132,6 +133,20 @@ public class PlayerController : MonoBehaviour
         {
             Destroy(gameObject);
             Instantiate(explosionParticle,transform.position, transform.rotation);
+            gameManager.GameOver();
+        }
+        else if(collision.gameObject.CompareTag("Goal") && !gameManager.isLevelCompleted)
+        {
+            gameManager.LevelCompleted();
+
+        }
+    }
+    IEnumerator CheckShoot()
+    {
+        yield return new WaitForSeconds(2);
+        if(!gameManager.isLevelCompleted)
+        {
+            gameManager.GameOver();
         }
     }
 }

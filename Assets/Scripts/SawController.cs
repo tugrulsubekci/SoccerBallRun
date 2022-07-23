@@ -29,11 +29,11 @@ public class SawController : MonoBehaviour
     {
         if (isRight)
         {
-            gameObject.transform.Translate(Vector3.left * Time.deltaTime * moveSpeed);
+            gameObject.transform.Translate(moveSpeed * Time.deltaTime * Vector3.left);
         }
         if (isLeft)
         {
-            gameObject.transform.Translate(Vector3.right * Time.deltaTime * moveSpeed);
+            gameObject.transform.Translate(moveSpeed * Time.deltaTime * Vector3.right);
         }
         if (transform.position.x <= -3.5)
         {

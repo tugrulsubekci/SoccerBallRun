@@ -8,8 +8,8 @@ public class GameManager : MonoBehaviour
     public bool isGameStarted;
     public bool gameOver;
     public bool isLevelCompleted;
-
-    public int coins;
+    public int ballIndex;
+    public int coins = 1000;
 
     [SerializeField] TextMeshProUGUI coinText;
     [SerializeField] GameObject gameOverPanel;

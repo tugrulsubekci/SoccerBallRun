@@ -13,8 +13,8 @@ AnimatorStateMachine:
     m_State: {fileID: 1352191991132516147}
     m_Position: {x: 420, y: 30, z: 0}
   - serializedVersion: 1
-    m_State: {fileID: 5747572232105697072}
-    m_Position: {x: 420, y: 220, z: 0}
+    m_State: {fileID: 8600797014121244905}
+    m_Position: {x: 459.02667, y: 288.06586, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -39,7 +39,7 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -64,7 +64,7 @@ AnimatorState:
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
-  - {fileID: 1582538104739151664}
+  - {fileID: 8285865168563226169}
   m_StateMachineBehaviours: []
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
@@ -80,7 +80,7 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
---- !u!1101 &1582538104739151664
+--- !u!1101 &8285865168563226169
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -92,7 +92,7 @@ AnimatorStateTransition:
     m_ConditionEvent: isGameStarted
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
-  m_DstState: {fileID: 5747572232105697072}
+  m_DstState: {fileID: 8600797014121244905}
   m_Solo: 0
   m_Mute: 0
   m_IsExit: 0
@@ -105,7 +105,7 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
---- !u!1102 &5747572232105697072
+--- !u!1102 &8600797014121244905
 AnimatorState:
   serializedVersion: 6
   m_ObjectHideFlags: 1
@@ -125,7 +125,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 4781951162920444690, guid: 52ca8e9b00d30e94f93ded8e54585b83,
+  m_Motion: {fileID: 4781951162920444690, guid: 59c441973c429ab4ab30f95c5c75ff02,
     type: 3}
   m_Tag: 
   m_SpeedParameter: 

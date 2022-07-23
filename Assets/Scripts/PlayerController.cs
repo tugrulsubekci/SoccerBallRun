@@ -36,7 +36,7 @@ public class PlayerController : MonoBehaviour
     {
         if (transform.position.z < shotPosZ)
         {
-            MoveePlayer();
+            MovePlayer();
         }
         else if (transform.position.z >= shotPosZ)
         {
@@ -75,15 +75,15 @@ public class PlayerController : MonoBehaviour
         if (isPositionOkay && !isShooted)
         {
             if (Input.GetKeyDown(KeyCode.Space))
-            {
-                playerRigidbody.AddForce(Vector3.forward * shotPower, ForceMode.Impulse);
+            {   
                 isShooted = true;
+                playerRigidbody.AddForce(Vector3.forward * shotPower, ForceMode.Impulse);
                 StartCoroutine(CheckShoot());
             }
         }
     }
-
-    void MovePlayer()
+    // Keyboard movement
+    /*void MovePlayer()
     {
         if (gameManager.isGameStarted)
         {
@@ -91,8 +91,8 @@ public class PlayerController : MonoBehaviour
             playerRigidbody.velocity = new Vector3(horizontalInput, playerRigidbody.velocity.y, forwardVelocity);
         }
 
-    }
-    void MoveePlayer()
+    }*/
+    void MovePlayer()
     {
         if (gameManager.isGameStarted)
         {

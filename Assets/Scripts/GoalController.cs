@@ -26,11 +26,11 @@ public class GoalController : MonoBehaviour
     {
         if (isRight)
         {
-            gameObject.transform.Translate(Vector3.forward * Time.deltaTime * moveSpeed);
+            gameObject.transform.Translate(moveSpeed * Time.deltaTime * Vector3.forward);
         }
         if (isLeft)
         {
-            gameObject.transform.Translate(Vector3.back * Time.deltaTime * moveSpeed);
+            gameObject.transform.Translate(moveSpeed * Time.deltaTime * Vector3.back);
         }
         if (transform.position.x <= -3.5)
         {

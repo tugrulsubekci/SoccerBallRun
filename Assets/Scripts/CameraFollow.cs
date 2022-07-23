@@ -10,7 +10,7 @@ public class CameraFollow : MonoBehaviour
     [SerializeField] GameObject player;
     private void Start()
     {
-        playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+        playerController = player.GetComponent<PlayerController>();
     }
     // Update is called once per frame
     void LateUpdate()

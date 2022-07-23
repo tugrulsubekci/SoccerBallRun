@@ -10,6 +10,10 @@ public class MenuManager : MonoBehaviour
     [SerializeField] GameObject menuObjects;
     [SerializeField] GameObject ball;
     [SerializeField] GameObject goal;
+    [SerializeField] GameObject settingsObjects;
+    [SerializeField] GameObject mute;
+    [SerializeField] GameObject unmute;
+    [SerializeField] GameObject shopPanel;
 
     [SerializeField] TextMeshProUGUI smallerBallLevelText;
     [SerializeField] TextMeshProUGUI largerGoalLevelText;
@@ -59,7 +63,6 @@ public class MenuManager : MonoBehaviour
             smallerBallCost = smallerBallLevel * 10;
             smallerBallCostText.text = smallerBallCost.ToString();
         }
-
     }
 
     public void LargerGoal()
@@ -84,5 +87,33 @@ public class MenuManager : MonoBehaviour
     public void NextLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+    public void SettingsButton()
+    {
+        if (settingsObjects.activeInHierarchy)
+        {
+            settingsObjects.SetActive(false);
+        }
+        else
+        {
+            settingsObjects.SetActive(true);
+        }
+    }
+    public void Mute()
+    {
+        if(mute.activeInHierarchy)
+        {
+            mute.SetActive(false);
+            unmute.SetActive(true);
+        }
+        else
+        {
+            mute.SetActive(true);
+            unmute.SetActive(false);
+        }
+    }
+    public void ShopButton()
+    {
+        shopPanel.SetActive(true);
     }
 }

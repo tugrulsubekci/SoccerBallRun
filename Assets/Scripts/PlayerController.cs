@@ -19,10 +19,14 @@ public class PlayerController : MonoBehaviour
     public bool isPositionOkay;
     public bool isShooted;
 
+    private bool isCameraPositionOkay;
+    [SerializeField] GameObject tapToShootText;
+
     private GameManager gameManager;
     private Vector3 _direction;
 
     [SerializeField] ParticleSystem explosionParticle;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -40,6 +44,7 @@ public class PlayerController : MonoBehaviour
         }
         else if (transform.position.z >= shotPosZ)
         {
+            StartCoroutine(CameraPosition());
             if (!isShooted)
             {
                 playerRigidbody.velocity = Vector3.zero;
@@ -74,8 +79,15 @@ public class PlayerController : MonoBehaviour
 
         if (isPositionOkay && !isShooted)
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            // Keyboard shoot
+            /*if (Input.GetKeyDown(KeyCode.Space) && isCameraPositionOkay)
             {   
+                isShooted = true;
+                playerRigidbody.AddForce(Vector3.forward * shotPower, ForceMode.Impulse);
+                StartCoroutine(CheckShoot());
+            }*/
+            if (Input.GetMouseButtonDown(0) && isCameraPositionOkay)
+            {
                 isShooted = true;
                 playerRigidbody.AddForce(Vector3.forward * shotPower, ForceMode.Impulse);
                 StartCoroutine(CheckShoot());
@@ -148,5 +160,11 @@ public class PlayerController : MonoBehaviour
         {
             gameManager.GameOver();
         }
+    }
+    IEnumerator CameraPosition()
+    {
+        yield return new WaitForSeconds(2);
+        isCameraPositionOkay = true;
+        tapToShootText.SetActive(true);
     }
 }

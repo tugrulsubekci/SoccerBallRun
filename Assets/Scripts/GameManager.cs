@@ -9,15 +9,21 @@ public class GameManager : MonoBehaviour
     public bool gameOver;
     public bool isLevelCompleted;
     public int ballIndex;
-    public int coins = 1000;
+    public int _coins;
 
     [SerializeField] TextMeshProUGUI coinText;
     [SerializeField] GameObject gameOverPanel;
     [SerializeField] GameObject levelCompletedPanel;
+    [SerializeField] ParticleSystem[] confeties;
+    private void Start()
+    {
+        DataManager.Instance.Load();
+        coinText.text = DataManager.Instance.coins.ToString();
+    }
     public void AddCoin(int amount)
     {
-        coins += amount;
-        coinText.text = coins.ToString();
+        _coins += amount;
+        coinText.text = (DataManager.Instance.coins + _coins).ToString();
     }
     public void GameOver()
     {
@@ -29,5 +35,11 @@ public class GameManager : MonoBehaviour
     {
         isLevelCompleted = true;
         levelCompletedPanel.SetActive(true);
+        DataManager.Instance.coins += _coins;
+        DataManager.Instance.Save();
+        for (int i = 0; i < confeties.Length; i++)
+        {
+            confeties[i].Play();
+        }
     }
 }

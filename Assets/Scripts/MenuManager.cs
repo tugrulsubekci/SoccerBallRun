@@ -17,6 +17,7 @@ public class MenuManager : MonoBehaviour
 
     [SerializeField] TextMeshProUGUI smallerBallLevelText;
     [SerializeField] TextMeshProUGUI largerGoalLevelText;
+
     [SerializeField] TextMeshProUGUI smallerBallCostText;
     [SerializeField] TextMeshProUGUI largerGoalCostText;
 
@@ -30,8 +31,25 @@ public class MenuManager : MonoBehaviour
     private void Start()
     {
         gameManager = FindObjectOfType<GameManager>();
+
+        smallerBallLevel += DataManager.Instance.smallerSkill_Level;
         smallerBallCost = smallerBallLevel * 10;
+        smallerBallLevelText.text = $"LEVEL {smallerBallLevel}";
+        smallerBallCostText.text = smallerBallCost.ToString();
+        for (int i = 0; i < smallerBallLevel; i++)
+        {
+            ball.transform.localScale /= 1.05f;
+        }
+
+        largerGoalLevel += DataManager.Instance.largerSkill_Level;
         largerGoalCost = largerGoalLevel * 10;
+        largerGoalCostText.text = largerGoalCost.ToString();
+        largerGoalLevelText.text = $"LEVEL {largerGoalLevel}";
+        for (int i = 0; i < largerGoalLevel; i++)
+        {
+            goal.transform.localScale *= 1.05f;
+        }
+
     }
 
     private void Update()
@@ -45,13 +63,15 @@ public class MenuManager : MonoBehaviour
     public void StartGame()
     {
         gameManager.isGameStarted = true;
-        instructionalObjects.SetActive(true);
+        if (SceneManager.GetActiveScene().buildIndex == 0)
+        {
+            instructionalObjects.SetActive(true);
+        }
         menuObjects.SetActive(false);
     }
-
     public void SmallerBall()
     {
-        if (gameManager.coins >= smallerBallCost)
+        if (DataManager.Instance.coins + gameManager._coins >= smallerBallCost)
         {
             ball.transform.localScale /= 1.05f;
 
@@ -59,6 +79,7 @@ public class MenuManager : MonoBehaviour
             smallerBallLevelText.text = $"LEVEL {smallerBallLevel}";
 
             gameManager.AddCoin(-smallerBallCost);
+            LevelUp(nameof(SmallerBall));
 
             smallerBallCost = smallerBallLevel * 10;
             smallerBallCostText.text = smallerBallCost.ToString();
@@ -67,7 +88,7 @@ public class MenuManager : MonoBehaviour
 
     public void LargerGoal()
     {
-        if (gameManager.coins >= largerGoalCost)
+        if (DataManager.Instance.coins + gameManager._coins >= largerGoalCost)
         {
             goal.transform.localScale *= 1.05f;
 
@@ -75,6 +96,7 @@ public class MenuManager : MonoBehaviour
             largerGoalLevelText.text = $"LEVEL {largerGoalLevel}";
 
             gameManager.AddCoin(-largerGoalCost);
+            LevelUp(nameof(LargerGoal));
 
             largerGoalCost = largerGoalLevel * 10;
             largerGoalCostText.text = largerGoalCost.ToString();
@@ -101,7 +123,7 @@ public class MenuManager : MonoBehaviour
     }
     public void Mute()
     {
-        if(mute.activeInHierarchy)
+        if (mute.activeInHierarchy)
         {
             mute.SetActive(false);
             unmute.SetActive(true);
@@ -115,5 +137,20 @@ public class MenuManager : MonoBehaviour
     public void ShopButton()
     {
         shopPanel.SetActive(true);
+    }
+    private void LevelUp(string skillName)
+    {
+        if (skillName == "LargerGoal")
+        {
+            DataManager.Instance.coins += gameManager._coins;
+            DataManager.Instance.largerSkill_Level++;
+            DataManager.Instance.Save();
+        }
+        else if (skillName == "SmallerBall")
+        {
+            DataManager.Instance.coins += gameManager._coins;
+            DataManager.Instance.smallerSkill_Level++;
+            DataManager.Instance.Save();
+        }
     }
 }

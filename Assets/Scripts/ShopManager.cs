@@ -8,16 +8,16 @@ public class ShopManager : MonoBehaviour
     private GameManager gameManager;
 
     [SerializeField] TextMeshProUGUI blackBallButtonText;
-    [SerializeField] TextMeshProUGUI blueBallButtonText;
-    [SerializeField] TextMeshProUGUI yellowBallButtonText;
+    [SerializeField] TextMeshProUGUI adidasBallButtonText;
+    [SerializeField] TextMeshProUGUI cafusaBallButtonText;
 
     [SerializeField] GameObject blackBallEffect;
-    [SerializeField] GameObject blueBallEffect;
-    [SerializeField] GameObject yellowBallEffect;
+    [SerializeField] GameObject adidasBallEffect;
+    [SerializeField] GameObject cafusaBallEffect;
 
     [SerializeField] GameObject blackBall;
-    [SerializeField] GameObject blueBall;
-    [SerializeField] GameObject yellowBall;
+    [SerializeField] GameObject adidasBall;
+    [SerializeField] GameObject cafusaBall;
 
     private void Awake()
     {
@@ -35,77 +35,77 @@ public class ShopManager : MonoBehaviour
             blackBall.SetActive(true);
             blackBallEffect.SetActive(true);
             blackBallButtonText.text = "Selected";
-            if (yellowBallButtonText.text == "Selected")
+            if (cafusaBallButtonText.text == "Selected")
             {
-                yellowBall.SetActive(false);
-                yellowBallEffect.SetActive(false);
-                yellowBallButtonText.text = "Select";
+                cafusaBall.SetActive(false);
+                cafusaBallEffect.SetActive(false);
+                cafusaBallButtonText.text = "Select";
             }
-            else if (blueBallButtonText.text == "Selected")
+            else if (adidasBallButtonText.text == "Selected")
             {
-                blueBall.SetActive(false);
-                blueBallEffect.SetActive(false);
-                blueBallButtonText.text = "Select";
+                adidasBall.SetActive(false);
+                adidasBallEffect.SetActive(false);
+                adidasBallButtonText.text = "Select";
             }
         }
     }
     public void BlueBallButton()
     {
-        if (blueBallButtonText.text == "Buy")
+        if (adidasBallButtonText.text == "Buy")
         {
-            if (gameManager.coins >= 100)
+            if (DataManager.Instance.coins + gameManager._coins >= 100)
             {
                 gameManager.AddCoin(-100);
-                blueBallButtonText.text = "Select";
+                adidasBallButtonText.text = "Select";
             }
         }
-        else if (blueBallButtonText.text == "Select")
+        else if (adidasBallButtonText.text == "Select")
         {
             gameManager.ballIndex = 1;
-            blueBall.SetActive(true);
-            blueBallEffect.SetActive(true);
-            blueBallButtonText.text = "Selected";
+            adidasBall.SetActive(true);
+            adidasBallEffect.SetActive(true);
+            adidasBallButtonText.text = "Selected";
             if (blackBallButtonText.text == "Selected")
             {
                 blackBall.SetActive(false);
                 blackBallEffect.SetActive(false);
                 blackBallButtonText.text = "Select";
             }
-            else if (yellowBallButtonText.text == "Selected")
+            else if (cafusaBallButtonText.text == "Selected")
             {
-                yellowBall.SetActive(false);
-                yellowBallEffect.SetActive(false);
-                yellowBallButtonText.text = "Select";
+                cafusaBall.SetActive(false);
+                cafusaBallEffect.SetActive(false);
+                cafusaBallButtonText.text = "Select";
             }
         }
     }
     public void YellowBallButton()
     {
-        if (yellowBallButtonText.text == "Buy")
+        if (cafusaBallButtonText.text == "Buy")
         {
-            if (gameManager.coins >= 200)
+            if (DataManager.Instance.coins + gameManager._coins >= 200)
             {
                 gameManager.AddCoin(-200);
-                yellowBallButtonText.text = "Select";
+                cafusaBallButtonText.text = "Select";
             }
         }
-        else if (yellowBallButtonText.text == "Select")
+        else if (cafusaBallButtonText.text == "Select")
         {
             gameManager.ballIndex = 2;
-            yellowBall.SetActive(true);
-            yellowBallEffect.SetActive(true);
-            yellowBallButtonText.text = "Selected";
+            cafusaBall.SetActive(true);
+            cafusaBallEffect.SetActive(true);
+            cafusaBallButtonText.text = "Selected";
             if (blackBallButtonText.text == "Selected")
             {
                 blackBall.SetActive(false);
                 blackBallEffect.SetActive(false);
                 blackBallButtonText.text = "Select";
             }
-            else if (blueBallButtonText.text == "Selected")
+            else if (adidasBallButtonText.text == "Selected")
             {
-                blueBall.SetActive(false);
-                blueBallEffect.SetActive(false);
-                blueBallButtonText.text = "Select";
+                adidasBall.SetActive(false);
+                adidasBallEffect.SetActive(false);
+                adidasBallButtonText.text = "Select";
             }
         }
     }

@@ -88,8 +88,8 @@ public class PlayerController : MonoBehaviour
             }*/
             if (Input.GetMouseButtonDown(0) && isCameraPositionOkay)
             {
-                isShooted = true;
                 playerRigidbody.AddForce(Vector3.forward * shotPower, ForceMode.Impulse);
+                isShooted = true;
                 StartCoroutine(CheckShoot());
             }
         }

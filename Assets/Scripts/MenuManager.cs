@@ -27,7 +27,10 @@ public class MenuManager : MonoBehaviour
     private int largerGoalCost;
 
     private GameManager gameManager;
-
+    private void Awake()
+    {
+        shopPanel.SetActive(true);
+    }
     private void Start()
     {
         gameManager = FindObjectOfType<GameManager>();
@@ -49,7 +52,6 @@ public class MenuManager : MonoBehaviour
         {
             goal.transform.localScale *= 1.05f;
         }
-
     }
 
     private void Update()

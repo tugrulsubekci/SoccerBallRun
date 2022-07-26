@@ -19,9 +19,94 @@ public class ShopManager : MonoBehaviour
     [SerializeField] GameObject adidasBall;
     [SerializeField] GameObject cafusaBall;
 
+    private bool Started = false;
     private void Awake()
     {
         gameManager = FindObjectOfType<GameManager>();
+    }
+    private void Start()
+    {
+        switch (DataManager.Instance.ballIndex)
+        {
+            case 0:
+                blackBallButtonText.text = "Selected";
+                blackBall.SetActive(true);
+                blackBallEffect.SetActive(true);
+
+                adidasBall.SetActive(false);
+                adidasBallEffect.SetActive(false);
+                if (DataManager.Instance.ball1)
+                {
+                    adidasBallButtonText.text = "Select";
+                }
+                else
+                {
+                    adidasBallButtonText.text = "Buy";
+                }
+
+                cafusaBall.SetActive(false);
+                cafusaBallEffect.SetActive(false);
+                if (DataManager.Instance.ball2)
+                {
+                    cafusaBallButtonText.text = "Select";
+                }
+                else
+                {
+                    cafusaBallButtonText.text = "Buy";
+                }
+
+                break;
+
+            case 1:
+                adidasBallButtonText.text = "Selected";
+                adidasBall.SetActive(true);
+                adidasBallEffect.SetActive(true);
+
+                cafusaBall.SetActive(false);
+                cafusaBallEffect.SetActive(false);
+                if (DataManager.Instance.ball2)
+                {
+                    cafusaBallButtonText.text = "Select";
+                }
+                else
+                {
+                    cafusaBallButtonText.text = "Buy";
+                }
+
+                blackBall.SetActive(false);
+                blackBallEffect.SetActive(false);
+                blackBallButtonText.text = "Select";
+
+                break;
+
+            case 2:
+                cafusaBallButtonText.text = "Selected";
+                cafusaBall.SetActive(true);
+                cafusaBallEffect.SetActive(true);
+
+                blackBall.SetActive(false);
+                blackBallEffect.SetActive(false);
+                blackBallButtonText.text = "Select";
+
+                adidasBall.SetActive(false);
+                adidasBallEffect.SetActive(false);
+                if (DataManager.Instance.ball1)
+                {
+                    adidasBallButtonText.text = "Select";
+                }
+                else
+                {
+                    adidasBallButtonText.text = "Buy";
+                }
+
+                break;
+        }
+        if (!Started)
+        {
+            this.gameObject.SetActive(false);
+            Started = true;
+        }
+
     }
     public void Cancel()
     {
@@ -31,9 +116,9 @@ public class ShopManager : MonoBehaviour
     {
         if (blackBallButtonText.text == "Select")
         {
-            gameManager.ballIndex = 0;
             blackBall.SetActive(true);
             blackBallEffect.SetActive(true);
+            SaveBallIndex(0);
             blackBallButtonText.text = "Selected";
             if (cafusaBallButtonText.text == "Selected")
             {
@@ -55,16 +140,16 @@ public class ShopManager : MonoBehaviour
         {
             if (DataManager.Instance.coins + gameManager._coins >= 100)
             {
-                gameManager.AddCoin(-100);
+                gameManager.BuyBall1();
                 adidasBallButtonText.text = "Select";
             }
         }
         else if (adidasBallButtonText.text == "Select")
         {
-            gameManager.ballIndex = 1;
             adidasBall.SetActive(true);
             adidasBallEffect.SetActive(true);
             adidasBallButtonText.text = "Selected";
+            SaveBallIndex(1);
             if (blackBallButtonText.text == "Selected")
             {
                 blackBall.SetActive(false);
@@ -85,16 +170,16 @@ public class ShopManager : MonoBehaviour
         {
             if (DataManager.Instance.coins + gameManager._coins >= 200)
             {
-                gameManager.AddCoin(-200);
+                gameManager.BuyBall2();
                 cafusaBallButtonText.text = "Select";
             }
         }
         else if (cafusaBallButtonText.text == "Select")
         {
-            gameManager.ballIndex = 2;
             cafusaBall.SetActive(true);
             cafusaBallEffect.SetActive(true);
             cafusaBallButtonText.text = "Selected";
+            SaveBallIndex(2);
             if (blackBallButtonText.text == "Selected")
             {
                 blackBall.SetActive(false);
@@ -108,5 +193,10 @@ public class ShopManager : MonoBehaviour
                 adidasBallButtonText.text = "Select";
             }
         }
+    }
+    private void SaveBallIndex(int ballInd)
+    {
+        DataManager.Instance.ballIndex = ballInd;
+        DataManager.Instance.Save();
     }
 }

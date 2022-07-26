@@ -47,9 +47,9 @@ MonoBehaviour:
   isGameStarted: 0
   gameOver: 0
   isLevelCompleted: 0
-  ballIndex: 0
   _coins: 0
   coinText: {fileID: 0}
+  levelText: {fileID: 0}
   gameOverPanel: {fileID: 0}
   levelCompletedPanel: {fileID: 0}
   confeties:

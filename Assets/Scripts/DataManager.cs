@@ -1,15 +1,18 @@
 using UnityEngine;
 using System.IO;
-using TMPro;
+using UnityEngine.SceneManagement;
 
 public class DataManager : MonoBehaviour
 {
     public static DataManager Instance;
     public int playerIndex;
     public int coins;
-    public int gameLevel;
+    public int levelIndex;
     public int largerSkill_Level;
     public int smallerSkill_Level;
+    public int ballIndex;
+    public bool ball1;
+    public bool ball2;
 
     void Awake()
     {
@@ -20,25 +23,36 @@ public class DataManager : MonoBehaviour
         }
         Instance = this;
         DontDestroyOnLoad(gameObject);
-        //File.Delete(Application.persistentDataPath + "/datafile.json"); // This line can be activated, If you want to delete save file.
+        // File.Delete(Application.persistentDataPath + "/datafile.json"); // This line can be activated, If you want to delete save file.
+        Load();
+        if (levelIndex != SceneManager.GetActiveScene().buildIndex)
+        {
+            SceneManager.LoadScene(levelIndex);
+        }
     }
     [System.Serializable]
     class SaveData
     {
         public int playerIndex;
         public int coins;
-        public int gameLevel;
+        public int levelIndex;
         public int largerSkill_Level;
         public int smallerSkill_Level;
+        public int ballIndex;
+        public bool ball1;
+        public bool ball2;
     }
     public void Save()
     {
         SaveData data = new SaveData();
         data.playerIndex = playerIndex;
         data.coins = coins;
-        data.gameLevel = gameLevel;
+        data.levelIndex = levelIndex;
         data.largerSkill_Level = largerSkill_Level;
         data.smallerSkill_Level = smallerSkill_Level;
+        data.ballIndex = ballIndex;
+        data.ball1 = ball1;
+        data.ball2 = ball2;
         string json = JsonUtility.ToJson(data);
         File.WriteAllText(Application.persistentDataPath + "/datafile.json", json);
     }
@@ -51,9 +65,12 @@ public class DataManager : MonoBehaviour
             SaveData data = JsonUtility.FromJson<SaveData>(json);
             coins = data.coins;
             playerIndex = data.playerIndex;
-            gameLevel = data.gameLevel;
+            levelIndex = data.levelIndex;
             largerSkill_Level = data.largerSkill_Level;
             smallerSkill_Level = data.smallerSkill_Level;
+            ballIndex = data.ballIndex;
+            ball1 = data.ball1;
+            ball2 = data.ball2;
         }
     }
 }

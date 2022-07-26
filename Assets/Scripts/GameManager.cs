@@ -46,12 +46,14 @@ public class GameManager : MonoBehaviour
     }
     public void GameOver()
     {
+        FindObjectOfType<AudioManager>().Play("GameOver");
         gameOver = true;
         gameOverPanel.SetActive(true);
     }
 
     public void LevelCompleted()
     {
+        FindObjectOfType<AudioManager>().Play("LevelCompleted");
         isLevelCompleted = true;
         levelCompletedPanel.SetActive(true);
         DataManager.Instance.coins += _coins;

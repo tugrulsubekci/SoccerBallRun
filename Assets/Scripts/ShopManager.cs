@@ -110,10 +110,12 @@ public class ShopManager : MonoBehaviour
     }
     public void Cancel()
     {
+        FindObjectOfType<AudioManager>().Play("Click");
         gameObject.SetActive(false);
     }
     public void BlackBallButton()
     {
+        FindObjectOfType<AudioManager>().Play("Click");
         if (blackBallButtonText.text == "Select")
         {
             blackBall.SetActive(true);
@@ -136,6 +138,7 @@ public class ShopManager : MonoBehaviour
     }
     public void BlueBallButton()
     {
+        FindObjectOfType<AudioManager>().Play("Click");
         if (adidasBallButtonText.text == "Buy")
         {
             if (DataManager.Instance.coins + gameManager._coins >= 100)
@@ -166,6 +169,7 @@ public class ShopManager : MonoBehaviour
     }
     public void YellowBallButton()
     {
+        FindObjectOfType<AudioManager>().Play("Click");
         if (cafusaBallButtonText.text == "Buy")
         {
             if (DataManager.Instance.coins + gameManager._coins >= 200)

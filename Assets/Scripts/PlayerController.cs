@@ -128,12 +128,14 @@ public class PlayerController : MonoBehaviour
     {
         if (other.CompareTag("SmallBall"))
         {
+            FindObjectOfType<AudioManager>().Play("SmallBall");
             transform.localScale = transform.localScale / 1.2f;
             other.gameObject.GetComponent<PanelAnimation>().isDestroyed = true;
             Destroy(other.gameObject, 0.6f);
         }
         if (other.CompareTag("BigBall"))
         {
+            FindObjectOfType<AudioManager>().Play("BigBall");
             transform.localScale = transform.localScale * 1.2f;
             other.gameObject.GetComponent<PanelAnimation>().isDestroyed = true;
             Destroy(other.gameObject, 0.6f);

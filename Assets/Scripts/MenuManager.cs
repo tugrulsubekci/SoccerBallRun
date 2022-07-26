@@ -114,6 +114,7 @@ public class MenuManager : MonoBehaviour
     }
     public void SettingsButton()
     {
+        FindObjectOfType<AudioManager>().Play("Click");
         if (settingsObjects.activeInHierarchy)
         {
             settingsObjects.SetActive(false);
@@ -125,6 +126,7 @@ public class MenuManager : MonoBehaviour
     }
     public void Mute()
     {
+        FindObjectOfType<AudioManager>().Play("Click");
         if (mute.activeInHierarchy)
         {
             mute.SetActive(false);
@@ -138,10 +140,12 @@ public class MenuManager : MonoBehaviour
     }
     public void ShopButton()
     {
+        FindObjectOfType<AudioManager>().Play("Click");
         shopPanel.SetActive(true);
     }
     private void LevelUp(string skillName)
     {
+        FindObjectOfType<AudioManager>().Play("LevelUp");
         if (skillName == "LargerGoal")
         {
             DataManager.Instance.coins += gameManager._coins;

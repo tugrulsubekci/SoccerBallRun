@@ -54,6 +54,7 @@ public class GameManager : MonoBehaviour
     public void LevelCompleted()
     {
         FindObjectOfType<AudioManager>().Play("LevelCompleted");
+        FindObjectOfType<AudioManager>().Play("Confetti");
         isLevelCompleted = true;
         levelCompletedPanel.SetActive(true);
         DataManager.Instance.coins += _coins;

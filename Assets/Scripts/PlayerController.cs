@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float distanceFromBall = 15;
     public bool isPositionOkay;
     public bool isShooted;
+    private bool isGrounded;
 
     private bool isCameraPositionOkay;
     [SerializeField] GameObject tapToShootText;
@@ -88,6 +89,7 @@ public class PlayerController : MonoBehaviour
             }*/
             if (Input.GetMouseButtonDown(0) && isCameraPositionOkay)
             {
+                FindObjectOfType<AudioManager>().Play("Shoot");
                 playerRigidbody.AddForce(Vector3.forward * shotPower, ForceMode.Impulse);
                 isShooted = true;
                 StartCoroutine(CheckShoot());
@@ -143,22 +145,27 @@ public class PlayerController : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.CompareTag("Obstacle"))
+        if (collision.gameObject.CompareTag("Obstacle"))
         {
+            FindObjectOfType<AudioManager>().Play("BallExplosion");
             Destroy(gameObject);
-            Instantiate(explosionParticle,transform.position, transform.rotation);
+            Instantiate(explosionParticle, transform.position, transform.rotation);
             gameManager.GameOver();
         }
-        else if(collision.gameObject.CompareTag("Goal") && !gameManager.isLevelCompleted)
+        else if (collision.gameObject.CompareTag("Goal") && !gameManager.isLevelCompleted)
         {
             gameManager.LevelCompleted();
 
+        }
+        else if (collision.gameObject.CompareTag("Ground"))
+        {
+            FindObjectOfType<AudioManager>().Play("Bounce");
         }
     }
     IEnumerator CheckShoot()
     {
         yield return new WaitForSeconds(2);
-        if(!gameManager.isLevelCompleted)
+        if (!gameManager.isLevelCompleted)
         {
             gameManager.GameOver();
         }

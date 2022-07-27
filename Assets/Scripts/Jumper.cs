@@ -9,6 +9,7 @@ public class Jumper : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            FindObjectOfType<AudioManager>().Play("Jump");
             Rigidbody playerRigidboy = other.gameObject.GetComponent<Rigidbody>();
             playerRigidboy.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         }

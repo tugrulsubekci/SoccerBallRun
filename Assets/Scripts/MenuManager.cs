@@ -64,12 +64,17 @@ public class MenuManager : MonoBehaviour
 
     public void StartGame()
     {
-        gameManager.isGameStarted = true;
+        FindObjectOfType<AudioManager>().Play("Start");        
         if (SceneManager.GetActiveScene().buildIndex == 0)
         {
             instructionalObjects.SetActive(true);
         }
         menuObjects.SetActive(false);
+        Invoke(nameof(StartNow), 0.5f);
+    }
+    public void StartNow()
+    {
+        gameManager.isGameStarted = true;
     }
     public void SmallerBall()
     {

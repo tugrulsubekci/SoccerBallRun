@@ -52,6 +52,18 @@ public class MenuManager : MonoBehaviour
         {
             goal.transform.localScale *= 1.05f;
         }
+
+        if(DataManager.Instance.isMusicOn)
+        {
+            mute.SetActive(true);
+            unmute.SetActive(false);
+        }
+        else
+        {
+            mute.SetActive(false);
+            unmute.SetActive(true);
+        }
+
     }
 
     private void Update()
@@ -134,14 +146,17 @@ public class MenuManager : MonoBehaviour
         FindObjectOfType<AudioManager>().Play("Click");
         if (mute.activeInHierarchy)
         {
+            DataManager.Instance.isMusicOn = false;
             mute.SetActive(false);
             unmute.SetActive(true);
         }
         else
         {
+            DataManager.Instance.isMusicOn = true;
             mute.SetActive(true);
             unmute.SetActive(false);
         }
+        DataManager.Instance.Save();
     }
     public void ShopButton()
     {

@@ -13,6 +13,7 @@ public class DataManager : MonoBehaviour
     public int ballIndex;
     public bool ball1;
     public bool ball2;
+    public bool isMusicOn = true;
 
     void Awake()
     {
@@ -41,6 +42,7 @@ public class DataManager : MonoBehaviour
         public int ballIndex;
         public bool ball1;
         public bool ball2;
+        public bool isMusicOn;
     }
     public void Save()
     {
@@ -53,6 +55,7 @@ public class DataManager : MonoBehaviour
         data.ballIndex = ballIndex;
         data.ball1 = ball1;
         data.ball2 = ball2;
+        data.isMusicOn = isMusicOn;
         string json = JsonUtility.ToJson(data);
         File.WriteAllText(Application.persistentDataPath + "/datafile.json", json);
     }
@@ -71,6 +74,7 @@ public class DataManager : MonoBehaviour
             ballIndex = data.ballIndex;
             ball1 = data.ball1;
             ball2 = data.ball2;
+            isMusicOn = data.isMusicOn;
         }
     }
 }

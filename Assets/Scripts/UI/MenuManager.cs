@@ -146,7 +146,14 @@ public class MenuManager : MonoBehaviour
     public void ShopButton()
     {
         FindObjectOfType<AudioManager>().Play("Click");
-        shopPanel.SetActive(true);
+        if(!shopPanel.activeInHierarchy)
+        {
+            shopPanel.SetActive(true);
+        }
+        else
+        {
+            shopPanel.SetActive(false);
+        }
     }
     private void LevelUp(string skillName)
     {

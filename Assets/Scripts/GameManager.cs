@@ -30,20 +30,6 @@ public class GameManager : MonoBehaviour
         _coins += amount;
         coinText.text = (DataManager.Instance.coins + _coins).ToString();
     }
-    public void BuyBall1()
-    {
-        DataManager.Instance.coins -= 100;
-        DataManager.Instance.ball1 = true;
-        DataManager.Instance.Save();
-        coinText.text = (DataManager.Instance.coins + _coins).ToString();
-    }
-    public void BuyBall2()
-    {
-        DataManager.Instance.coins -= 200;
-        DataManager.Instance.ball2 = true;
-        DataManager.Instance.Save();
-        coinText.text = (DataManager.Instance.coins + _coins).ToString();
-    }
     public void GameOver()
     {
         FindObjectOfType<AudioManager>().Play("GameOver");

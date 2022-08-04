@@ -18,7 +18,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float distanceFromBall = 15;
     public bool isPositionOkay;
     public bool isShooted;
-    private bool isGrounded;
 
     private bool isCameraPositionOkay;
     [SerializeField] GameObject tapToShootText;

@@ -1,6 +1,5 @@
 using UnityEngine;
 using TMPro;
-using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -8,7 +7,6 @@ public class GameManager : MonoBehaviour
     public bool gameOver;
     public bool isLevelCompleted;
     public int _coins;
-    public int frameRate = 60;
 
     [SerializeField] TextMeshProUGUI coinText;
     [SerializeField] TextMeshProUGUI levelText;
@@ -18,7 +16,6 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        Application.targetFrameRate = frameRate;
         coinText.text = DataManager.Instance.coins.ToString();
         levelText.text = $"LEVEL {DataManager.Instance.levelIndex + 1}";
     }

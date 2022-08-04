@@ -33,6 +33,7 @@ public class DataManager : MonoBehaviour
             SceneManager.LoadScene(levelIndex);
         }
     }
+
     [System.Serializable]
     class SaveData
     {
@@ -48,6 +49,7 @@ public class DataManager : MonoBehaviour
         public bool[] purchaseData;
         public bool[] selectData;
     }
+
     public void Save()
     {
         SaveData data = new SaveData();

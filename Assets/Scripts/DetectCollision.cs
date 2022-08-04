@@ -16,5 +16,6 @@ public class DetectCollision : MonoBehaviour
         Destroy(gameObject);
         Instantiate(coinParticle, transform.position, transform.rotation);
         gameManager.AddCoin(1);
+        Vibrator.Vibrate(50);
     }
 }

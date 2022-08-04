@@ -14,6 +14,8 @@ public class DataManager : MonoBehaviour
     public bool ball1;
     public bool ball2;
     public bool isMusicOn = true;
+    public bool[] purchaseData;
+    public bool[] selectData;
 
     void Awake()
     {
@@ -43,6 +45,8 @@ public class DataManager : MonoBehaviour
         public bool ball1;
         public bool ball2;
         public bool isMusicOn;
+        public bool[] purchaseData;
+        public bool[] selectData;
     }
     public void Save()
     {
@@ -56,6 +60,8 @@ public class DataManager : MonoBehaviour
         data.ball1 = ball1;
         data.ball2 = ball2;
         data.isMusicOn = isMusicOn;
+        data.purchaseData = purchaseData;
+        data.selectData = selectData;
         string json = JsonUtility.ToJson(data);
         File.WriteAllText(Application.persistentDataPath + "/datafile.json", json);
     }
@@ -75,6 +81,8 @@ public class DataManager : MonoBehaviour
             ball1 = data.ball1;
             ball2 = data.ball2;
             isMusicOn = data.isMusicOn;
+            purchaseData = data.purchaseData;
+            selectData = data.selectData;
         }
     }
 }

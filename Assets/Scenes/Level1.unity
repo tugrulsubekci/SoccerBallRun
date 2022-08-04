@@ -1247,6 +1247,8 @@ MonoBehaviour:
   largerSkill_Level: 0
   smallerSkill_Level: 0
   ballIndex: 0
+  purchaseData: 
+  selectData: 
 --- !u!4 &1436939144
 Transform:
   m_ObjectHideFlags: 0
@@ -1255,7 +1257,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1436939142}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 40.03246, y: 26.986662, z: -23.273222}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

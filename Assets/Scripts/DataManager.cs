@@ -11,6 +11,8 @@ public class DataManager : MonoBehaviour
     public int largerSkill_Level;
     public int smallerSkill_Level;
     public int ballIndex;
+    public bool[] purchaseData;
+    public bool[] selectData;
 
     void Awake()
     {
@@ -21,7 +23,7 @@ public class DataManager : MonoBehaviour
         }
         Instance = this;
         DontDestroyOnLoad(gameObject);
-        File.Delete(Application.persistentDataPath + "/datafile.json"); // This line can be activated, If you want to delete save file.
+        // File.Delete(Application.persistentDataPath + "/datafile.json"); // This line can be activated, If you want to delete save file.
         Load();
         if (levelIndex != SceneManager.GetActiveScene().buildIndex)
         {
@@ -37,6 +39,8 @@ public class DataManager : MonoBehaviour
         public int largerSkill_Level;
         public int smallerSkill_Level;
         public int ballIndex;
+        public bool[] purchaseData;
+        public bool[] selectData;
     }
     public void Save()
     {
@@ -47,6 +51,8 @@ public class DataManager : MonoBehaviour
         data.largerSkill_Level = largerSkill_Level;
         data.smallerSkill_Level = smallerSkill_Level;
         data.ballIndex = ballIndex;
+        data.purchaseData = purchaseData;
+        data.selectData = selectData;
         string json = JsonUtility.ToJson(data);
         File.WriteAllText(Application.persistentDataPath + "/datafile.json", json);
     }
@@ -63,6 +69,8 @@ public class DataManager : MonoBehaviour
             largerSkill_Level = data.largerSkill_Level;
             smallerSkill_Level = data.smallerSkill_Level;
             ballIndex = data.ballIndex;
+            purchaseData = data.purchaseData;
+            selectData = data.selectData;
         }
     }
 }

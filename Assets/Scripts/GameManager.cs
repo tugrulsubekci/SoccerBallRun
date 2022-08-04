@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     public bool gameOver;
     public bool isLevelCompleted;
     public int _coins;
+    public int frameRate = 60;
 
     [SerializeField] TextMeshProUGUI coinText;
     [SerializeField] TextMeshProUGUI levelText;
@@ -17,11 +18,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        // DataManager.Instance.Load();
-        /*if(DataManager.Instance.levelIndex != SceneManager.GetActiveScene().buildIndex)
-        {
-            SceneManager.LoadScene(DataManager.Instance.levelIndex);
-        }*/
+        Application.targetFrameRate = frameRate;
         coinText.text = DataManager.Instance.coins.ToString();
         levelText.text = $"LEVEL {DataManager.Instance.levelIndex + 1}";
     }
@@ -29,6 +26,15 @@ public class GameManager : MonoBehaviour
     {
         _coins += amount;
         coinText.text = (DataManager.Instance.coins + _coins).ToString();
+    }
+    public void BuyItem(int price)
+    {
+        DataManager.Instance.coins -= price;
+        coinText.text = DataManager.Instance.coins.ToString();
+    }
+    public bool HasEnoughCoins(int price)
+    {
+        return DataManager.Instance.coins >= price;
     }
     public void GameOver()
     {

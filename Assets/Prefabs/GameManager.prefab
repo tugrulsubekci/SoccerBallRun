@@ -50,6 +50,7 @@ MonoBehaviour:
   _coins: 0
   coinText: {fileID: 0}
   levelText: {fileID: 0}
+  gainedCoinsText: {fileID: 0}
   gameOverPanel: {fileID: 0}
   levelCompletedPanel: {fileID: 0}
   confeties:

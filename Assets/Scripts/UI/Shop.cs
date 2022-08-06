@@ -19,6 +19,7 @@ public class Shop : MonoBehaviour
     [SerializeField] GameObject shopPanel;
     private Button buyButton;
     private Button selectButton;
+    private int purchasedTextFontSize = 17;
 
     private GameManager gameManager;
     private Transform player;
@@ -37,14 +38,16 @@ public class Shop : MonoBehaviour
         {
             g = Instantiate(itemTemplate, content);
             g.transform.GetChild(1).GetComponent<Image>().sprite = Items[i].image;
-            g.transform.GetChild(2).GetChild(0).GetComponent<TextMeshProUGUI>().text = Items[i].price.ToString();
+            g.transform.GetChild(2).GetChild(1).GetComponent<TextMeshProUGUI>().text = Items[i].price.ToString();
             buyButton = g.transform.GetChild(3).GetComponent<Button>();
             buyButton.interactable = !Items[i].isPurchased;
             selectButton = g.transform.GetChild(4).GetComponent<Button>();
             if (Items[i].isPurchased)
             {
-                buyButton.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "PURCHASED";
-                buyButton.transform.GetChild(0).GetComponent<TextMeshProUGUI>().fontSize = 14;
+                TextMeshProUGUI buyBtnText = buyButton.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
+                buyBtnText.text = "PURCHASED";
+                buyBtnText.fontSize = purchasedTextFontSize;
+                buyBtnText.color = Color.gray;
                 selectButton.gameObject.SetActive(true);
             }
             if (Items[i].isSelected)
@@ -73,7 +76,8 @@ public class Shop : MonoBehaviour
             buyButton = content.transform.GetChild(itemIndex).GetChild(3).GetComponent<Button>();
             buyButton.interactable = false;
             buyButton.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "PURCHASED";
-            buyButton.transform.GetChild(0).GetComponent<TextMeshProUGUI>().fontSize = 14;
+            buyButton.transform.GetChild(0).GetComponent<TextMeshProUGUI>().fontSize = purchasedTextFontSize;
+            buyButton.transform.GetChild(0).GetComponent<TextMeshProUGUI>().color = Color.gray;
             selectButton = content.transform.GetChild(itemIndex).GetChild(4).GetComponent<Button>();
             selectButton.gameObject.SetActive(true);
             gameManager.BuyItem(Items[itemIndex].price);

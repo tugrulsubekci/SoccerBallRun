@@ -164,7 +164,7 @@ public class PlayerController : MonoBehaviour
     IEnumerator CheckShoot()
     {
         yield return new WaitForSeconds(2);
-        if (!gameManager.isLevelCompleted)
+        while(!gameManager.gameOver && !gameManager.isLevelCompleted)
         {
             gameManager.GameOver();
         }
@@ -172,7 +172,10 @@ public class PlayerController : MonoBehaviour
     IEnumerator CameraPosition()
     {
         yield return new WaitForSeconds(2);
-        isCameraPositionOkay = true;
-        tapToShootText.SetActive(true);
+        while (!isCameraPositionOkay)
+        {
+            isCameraPositionOkay = true;
+            tapToShootText.SetActive(true);
+        }
     }
 }

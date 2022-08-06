@@ -37,6 +37,8 @@ public class GameManager : MonoBehaviour
     {
         FindObjectOfType<AudioManager>().Play("GameOver");
         gameOver = true;
+        GameObject tapToShootText = levelCompletedPanel.transform.parent.GetChild(6).gameObject;
+        tapToShootText.SetActive(false);
         gameOverPanel.SetActive(true);
     }
 
@@ -45,6 +47,13 @@ public class GameManager : MonoBehaviour
         FindObjectOfType<AudioManager>().Play("LevelCompleted");
         FindObjectOfType<AudioManager>().Play("Confetti");
         isLevelCompleted = true;
+
+        TextMeshProUGUI gainedCoinsText = levelCompletedPanel.transform.GetChild(2).GetChild(1).GetComponent<TextMeshProUGUI>();
+        gainedCoinsText.text = _coins.ToString();
+
+        GameObject tapToShootText = levelCompletedPanel.transform.parent.GetChild(6).gameObject;
+        tapToShootText.SetActive(false);
+
         levelCompletedPanel.SetActive(true);
         DataManager.Instance.coins += _coins;
         DataManager.Instance.levelIndex++;

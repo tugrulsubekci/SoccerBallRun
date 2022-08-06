@@ -12,7 +12,7 @@ public class MenuManager : MonoBehaviour
     [SerializeField] GameObject goal;
     [SerializeField] GameObject settingsObjects;
     [SerializeField] GameObject mute;
-    [SerializeField] GameObject unmute;
+    [SerializeField] GameObject vibration;
     [SerializeField] GameObject shopPanel;
 
     [SerializeField] TextMeshProUGUI smallerBallLevelText;
@@ -55,13 +55,11 @@ public class MenuManager : MonoBehaviour
 
         if(DataManager.Instance.isMusicOn)
         {
-            mute.SetActive(true);
-            unmute.SetActive(false);
+            mute.SetActive(false);
         }
         else
         {
-            mute.SetActive(false);
-            unmute.SetActive(true);
+            mute.SetActive(true);
         }
 
     }
@@ -146,15 +144,28 @@ public class MenuManager : MonoBehaviour
         FindObjectOfType<AudioManager>().Play("Click");
         if (mute.activeInHierarchy)
         {
-            DataManager.Instance.isMusicOn = false;
+            DataManager.Instance.isMusicOn = true;
             mute.SetActive(false);
-            unmute.SetActive(true);
         }
         else
         {
-            DataManager.Instance.isMusicOn = true;
+            DataManager.Instance.isMusicOn = false;
             mute.SetActive(true);
-            unmute.SetActive(false);
+        }
+        DataManager.Instance.Save();
+    }
+    public void Vibration()
+    {
+        FindObjectOfType<AudioManager>().Play("Click");
+        if (vibration.activeInHierarchy)
+        {
+            DataManager.Instance.isVibrationOn = true;
+            vibration.SetActive(false);
+        }
+        else
+        {
+            DataManager.Instance.isVibrationOn = false;
+            vibration.SetActive(true);
         }
         DataManager.Instance.Save();
     }

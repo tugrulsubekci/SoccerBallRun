@@ -14,6 +14,7 @@ public class DataManager : MonoBehaviour
     public bool ball1;
     public bool ball2;
     public bool isMusicOn = true;
+    public bool isVibrationOn = true;
     public bool[] purchaseData;
     public bool[] selectData;
 
@@ -26,7 +27,7 @@ public class DataManager : MonoBehaviour
         }
         Instance = this;
         DontDestroyOnLoad(gameObject);
-        File.Delete(Application.persistentDataPath + "/datafile.json"); // This line can be activated, If you want to delete save file.
+        // File.Delete(Application.persistentDataPath + "/datafile.json"); // This line can be activated, If you want to delete save file.
         Load();
         if (levelIndex != SceneManager.GetActiveScene().buildIndex)
         {
@@ -46,6 +47,7 @@ public class DataManager : MonoBehaviour
         public bool ball1;
         public bool ball2;
         public bool isMusicOn;
+        public bool isVibrationOn;
         public bool[] purchaseData;
         public bool[] selectData;
     }
@@ -62,6 +64,7 @@ public class DataManager : MonoBehaviour
         data.ball1 = ball1;
         data.ball2 = ball2;
         data.isMusicOn = isMusicOn;
+        data.isVibrationOn = isVibrationOn;
         data.purchaseData = purchaseData;
         data.selectData = selectData;
         string json = JsonUtility.ToJson(data);
@@ -83,6 +86,7 @@ public class DataManager : MonoBehaviour
             ball1 = data.ball1;
             ball2 = data.ball2;
             isMusicOn = data.isMusicOn;
+            isVibrationOn = data.isVibrationOn;
             purchaseData = data.purchaseData;
             selectData = data.selectData;
         }

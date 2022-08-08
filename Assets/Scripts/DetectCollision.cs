@@ -18,7 +18,7 @@ public class DetectCollision : MonoBehaviour
         gameManager.AddCoin(1);
         if(DataManager.Instance.isVibrationOn)
         {
-            Vibrator.Vibrate(50);
+            Vibrator.Vibrate(100);
         }
     }
 }

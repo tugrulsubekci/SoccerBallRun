@@ -26,13 +26,16 @@ public class PlayerController : MonoBehaviour
     private Vector3 _direction;
 
     [SerializeField] ParticleSystem explosionParticle;
-
     // Start is called before the first frame update
     void Start()
     {
         gameManager = FindObjectOfType<GameManager>();
         playerRigidbody = GetComponent<Rigidbody>();
         shotPosZ = Goal.transform.position.z - distanceFromBall;
+        if (AdsInitializer.Instance.isRevived)
+        {
+            Revive();
+        }
     }
 
     // Update is called once per frame
@@ -79,6 +82,7 @@ public class PlayerController : MonoBehaviour
 
         if (isPositionOkay && !isShooted)
         {
+            playerRigidbody.constraints = RigidbodyConstraints.FreezePositionY;
             // Keyboard shoot
             /*if (Input.GetKeyDown(KeyCode.Space) && isCameraPositionOkay)
             {   
@@ -112,6 +116,10 @@ public class PlayerController : MonoBehaviour
             horizontalInput = _direction.x * movementSpeed;
             playerRigidbody.velocity = new Vector3(horizontalInput, playerRigidbody.velocity.y, forwardVelocity);
         }
+        else if(!gameManager.isGameStarted)
+        {
+            playerRigidbody.velocity = Vector3.zero;
+        }
     }
 
     void CheckPosition()
@@ -131,14 +139,14 @@ public class PlayerController : MonoBehaviour
         {
             FindObjectOfType<AudioManager>().Play("SmallBall");
             transform.localScale = transform.localScale / 1.2f;
-            other.gameObject.GetComponent<PanelAnimation>().isDestroyed = true;
+            other.gameObject.GetComponent<Animator>().SetBool("isDestroyed", true);
             Destroy(other.gameObject, 0.6f);
         }
         if (other.CompareTag("BigBall"))
         {
             FindObjectOfType<AudioManager>().Play("BigBall");
             transform.localScale = transform.localScale * 1.2f;
-            other.gameObject.GetComponent<PanelAnimation>().isDestroyed = true;
+            other.gameObject.GetComponent<Animator>().SetBool("isDestroyed", true);
             Destroy(other.gameObject, 0.6f);
         }
     }
@@ -147,7 +155,7 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("Obstacle"))
         {
             FindObjectOfType<AudioManager>().Play("BallExplosion");
-            Destroy(gameObject);
+            gameObject.SetActive(false);
             Instantiate(explosionParticle, transform.position, transform.rotation);
             gameManager.GameOver();
         }
@@ -160,6 +168,53 @@ public class PlayerController : MonoBehaviour
         {
             FindObjectOfType<AudioManager>().Play("Bounce");
         }
+    }
+    private void Revive()
+    {
+        GameObject[] x = GameObject.FindGameObjectsWithTag("Obstacle");
+        GameObject[] y = GameObject.FindGameObjectsWithTag("SmallBall");
+        GameObject[] z = GameObject.FindGameObjectsWithTag("BigBall");
+        GameObject[] c = GameObject.FindGameObjectsWithTag("Coin");
+        foreach (GameObject obstacle in x)
+        {
+            if (obstacle.transform.position.z <= AdsInitializer.Instance.playerPos.z)
+            {
+                Destroy(obstacle);
+            }
+        }
+        foreach (GameObject obstacle in y)
+        {
+            if (obstacle.transform.position.z <= AdsInitializer.Instance.playerPos.z)
+            {
+                Destroy(obstacle);
+            }
+        }
+        foreach (GameObject obstacle in z)
+        {
+            if (obstacle.transform.position.z <= AdsInitializer.Instance.playerPos.z)
+            {
+                Destroy(obstacle);
+            }
+        }
+        foreach (GameObject obstacle in c)
+        {
+            if (obstacle.transform.position.z <= AdsInitializer.Instance.playerPos.z)
+            {
+                Destroy(obstacle);
+            }
+        }
+        Vector3 revivePos = AdsInitializer.Instance.playerPos + new Vector3(0, 0, -10);
+        if(revivePos.z < shotPosZ)
+        {
+            transform.position = revivePos;
+        }
+        else if(revivePos.z >= shotPosZ)
+        {
+            revivePos.z = shotPosZ - 10;
+            transform.position = revivePos;
+        }
+        gameManager._coins = AdsInitializer.Instance.reviveCoins;
+        AdsInitializer.Instance.isRevived = false;
     }
     IEnumerator CheckShoot()
     {

@@ -325,7 +325,6 @@ GameObject:
   - component: {fileID: 4110573238709231184}
   - component: {fileID: 1584221816}
   - component: {fileID: 4134856818727320926}
-  - component: {fileID: 2005019565}
   m_Layer: 0
   m_Name: Obstacle_SmallBall
   m_TagString: SmallBall
@@ -384,19 +383,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &2005019565
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4110573238709231185}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c549591b79838d9439244557f96532f6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isDestroyed: 0
 --- !u!1 &5211738386193914361
 GameObject:
   m_ObjectHideFlags: 0

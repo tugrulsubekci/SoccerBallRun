@@ -14,10 +14,17 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject levelCompletedPanel;
     [SerializeField] ParticleSystem[] confeties;
 
+    private ReviveButton rewardedAdsButton1;
+    private RewardedAdsButton rewardedAdsButton2;
+
+    private InterstitialAds interstitialAds;
     private void Start()
     {
         coinText.text = DataManager.Instance.coins.ToString();
         levelText.text = $"LEVEL {DataManager.Instance.levelIndex + 1}";
+        rewardedAdsButton1 = gameOverPanel.transform.GetChild(1).GetComponent<ReviveButton>();
+        rewardedAdsButton2 = gameOverPanel.transform.GetChild(3).GetComponent<RewardedAdsButton>();
+        interstitialAds = GetComponent<InterstitialAds>();
     }
     public void AddCoin(int amount)
     {
@@ -40,6 +47,8 @@ public class GameManager : MonoBehaviour
         GameObject tapToShootText = levelCompletedPanel.transform.parent.GetChild(6).gameObject;
         tapToShootText.SetActive(false);
         gameOverPanel.SetActive(true);
+        rewardedAdsButton1.LoadAd();
+        rewardedAdsButton2.LoadAd();
     }
 
     public void LevelCompleted()
@@ -55,12 +64,27 @@ public class GameManager : MonoBehaviour
         tapToShootText.SetActive(false);
 
         levelCompletedPanel.SetActive(true);
-        DataManager.Instance.coins += _coins;
-        DataManager.Instance.levelIndex++;
-        DataManager.Instance.Save();
+
         for (int i = 0; i < confeties.Length; i++)
         {
             confeties[i].Play();
         }
+
+        if(DataManager.Instance.levelIndex % 2 - 1 == 0)
+        {
+            interstitialAds.LoadAd();
+            interstitialAds.ShowAd();
+        }
+
+        DataManager.Instance.coins += _coins;
+        DataManager.Instance.levelIndex++;
+        DataManager.Instance.Save();
+    }
+    public void Revive()
+    {
+        gameOver = false;
+        isGameStarted = false;
+        gameOverPanel.SetActive(false);
+        gameOverPanel.transform.parent.GetChild(0).gameObject.SetActive(true);
     }
 }

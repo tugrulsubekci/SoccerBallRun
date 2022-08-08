@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 4378709190382462316}
   m_Layer: 0
   m_Name: Obstacle_Saw
-  m_TagString: Untagged
+  m_TagString: Revive
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -377,7 +377,6 @@ GameObject:
   - component: {fileID: 9170996324850680904}
   - component: {fileID: 630566630}
   - component: {fileID: 630566631}
-  - component: {fileID: 630566632}
   m_Layer: 0
   m_Name: circularSaw
   m_TagString: Obstacle
@@ -436,15 +435,3 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &630566632
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8734682910069978661}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a624a4b757041a408c5d8be5f11aca5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

@@ -10,6 +10,8 @@ TagManager:
   - Jump
   - Goal
   - Obstacle
+  - Revive
+  - Coin
   layers:
   - Default
   - TransparentFX

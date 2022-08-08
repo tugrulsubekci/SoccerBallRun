@@ -9,15 +9,15 @@ public class GoalController : MonoBehaviour
 
     [SerializeField] float moveSpeed = 2;
 
-    private GameManager gameManager;
+    private PlayerController playerController;
     private void Start()
     {
-        gameManager = FindObjectOfType<GameManager>();
+        playerController = FindObjectOfType<PlayerController>();
     }
     // Update is called once per frame
     void Update()
     {
-        if(gameManager.isGameStarted)
+        if(playerController.isPositionOkay)
         {
             Move();
         }

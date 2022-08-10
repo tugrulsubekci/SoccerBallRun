@@ -6,7 +6,7 @@ public class AdsInitializer : MonoBehaviour, IUnityAdsInitializationListener
     public static AdsInitializer Instance;
     [SerializeField] string _androidGameId;
     [SerializeField] string _iOSGameId;
-    [SerializeField] bool _testMode = true;
+    private bool _testMode = false;
     private string _gameId;
 
     public bool isRevived;

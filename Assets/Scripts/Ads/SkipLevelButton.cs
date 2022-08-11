@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using UnityEngine.Advertisements;
 using UnityEngine.SceneManagement;
 
-public class RewardedAdsButton : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowListener
+public class SkipLevelButton : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowListener
 {
     [SerializeField] Button _showAdButton;
     [SerializeField] string _androidAdUnitId = "Rewarded_Android";

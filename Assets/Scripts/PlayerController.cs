@@ -179,28 +179,28 @@ public class PlayerController : MonoBehaviour
         {
             if (obstacle.transform.position.z <= AdsInitializer.Instance.playerPos.z)
             {
-                Destroy(obstacle);
+                obstacle.SetActive(false);
             }
         }
         foreach (GameObject obstacle in y)
         {
             if (obstacle.transform.position.z <= AdsInitializer.Instance.playerPos.z)
             {
-                Destroy(obstacle);
+                obstacle.SetActive(false);
             }
         }
         foreach (GameObject obstacle in z)
         {
             if (obstacle.transform.position.z <= AdsInitializer.Instance.playerPos.z)
             {
-                Destroy(obstacle);
+                obstacle.SetActive(false);
             }
         }
         foreach (GameObject obstacle in c)
         {
             if (obstacle.transform.position.z <= AdsInitializer.Instance.playerPos.z)
             {
-                Destroy(obstacle);
+                obstacle.SetActive(false);
             }
         }
         Vector3 revivePos = AdsInitializer.Instance.playerPos + new Vector3(0, 0, -10);

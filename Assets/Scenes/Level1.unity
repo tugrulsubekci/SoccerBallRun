@@ -416,7 +416,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &616467838
 PrefabInstance:
@@ -1216,6 +1216,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameAnalytics
       objectReference: {fileID: 0}
+    - target: {fileID: 165288, guid: a9d27d37bab3c447b8eb7a2a6756e952, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 465288, guid: a9d27d37bab3c447b8eb7a2a6756e952, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -1717,7 +1721,7 @@ PrefabInstance:
     - target: {fileID: 5776442041071946353, guid: cd7eca9b50d4fad4291a215acf7df56a,
         type: 3}
       propertyPath: m_RootOrder
-      value: 12
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 5776442041071946353, guid: cd7eca9b50d4fad4291a215acf7df56a,
         type: 3}

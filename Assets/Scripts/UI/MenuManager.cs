@@ -75,7 +75,7 @@ public class MenuManager : MonoBehaviour
     public void StartGame()
     {
         FindObjectOfType<AudioManager>().Play("Start");        
-        if (SceneManager.GetActiveScene().buildIndex == 0)
+        if (DataManager.Instance.levelNumber == 0)
         {
             instructionalObjects.SetActive(true);
         }
@@ -125,7 +125,16 @@ public class MenuManager : MonoBehaviour
     }
     public void NextLevel()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        if(DataManager.Instance.levelIndex < 10)
+        {
+            SceneManager.LoadScene(DataManager.Instance.levelIndex + 1);
+        }
+        else if (DataManager.Instance.levelIndex == 10)
+        {
+            DataManager.Instance.levelIndex = 0;
+            DataManager.Instance.Save();
+            SceneManager.LoadScene(DataManager.Instance.levelIndex);
+        }
     }
     public void SettingsButton()
     {

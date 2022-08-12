@@ -62,8 +62,18 @@ public class SkipLevelButton : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsSh
             Debug.Log("Unity Ads Rewarded Ad Completed");
             // Grant a reward.
             DataManager.Instance.levelIndex++;
+            DataManager.Instance.levelNumber++;
             DataManager.Instance.Save();
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            if (DataManager.Instance.levelIndex < 10)
+            {
+                SceneManager.LoadScene(DataManager.Instance.levelIndex + 1);
+            }
+            else if (DataManager.Instance.levelIndex == 10)
+            {
+                DataManager.Instance.levelIndex = 0;
+                DataManager.Instance.Save();
+                SceneManager.LoadScene(DataManager.Instance.levelIndex);
+            }
             // Load another ad:
             // Advertisement.Load(_adUnitId, this); // This line can be activated
         }

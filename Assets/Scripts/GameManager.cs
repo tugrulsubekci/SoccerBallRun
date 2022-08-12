@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         coinText.text = DataManager.Instance.coins.ToString();
-        levelText.text = $"LEVEL {DataManager.Instance.levelIndex + 1}";
+        levelText.text = $"LEVEL {DataManager.Instance.levelNumber + 1}";
         rewardedAdsButton1 = gameOverPanel.transform.GetChild(1).GetComponent<ReviveButton>();
         rewardedAdsButton2 = gameOverPanel.transform.GetChild(3).GetComponent<SkipLevelButton>();
         interstitialAds = GetComponent<InterstitialAds>();
@@ -78,6 +78,7 @@ public class GameManager : MonoBehaviour
 
         DataManager.Instance.coins += _coins;
         DataManager.Instance.levelIndex++;
+        DataManager.Instance.levelNumber++;
         DataManager.Instance.Save();
     }
     public void Revive()

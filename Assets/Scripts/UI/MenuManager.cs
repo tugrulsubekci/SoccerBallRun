@@ -110,7 +110,7 @@ public class MenuManager : MonoBehaviour
         }
         else if (DataManager.Instance.levelIndex == 10)
         {
-            DataManager.Instance.levelIndex = 0;
+            DataManager.Instance.levelIndex = 1;
             DataManager.Instance.Save();
             SceneManager.LoadScene(DataManager.Instance.levelIndex);
         }

@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6838477673296921639}
   - component: {fileID: 6838477673296921816}
-  - component: {fileID: 5213428364242174632}
   - component: {fileID: 650778244}
   m_Layer: 0
   m_Name: GameManager
@@ -58,20 +57,6 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
---- !u!114 &5213428364242174632
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6838477673296921817}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ecb992c0753fd944941e92f870666d9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _androidAdUnitId: Interstitial_Android
-  _iOsAdUnitId: Interstitial_iOS
 --- !u!114 &650778244
 MonoBehaviour:
   m_ObjectHideFlags: 0

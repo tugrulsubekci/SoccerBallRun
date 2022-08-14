@@ -38,7 +38,7 @@ public class PlayerController : MonoBehaviour
         shotPosZ = Goal.transform.position.z - distanceFromBall;
         menu = tapToShootText.transform.parent.GetChild(0).gameObject;
         revive = tapToShootText.transform.parent.GetChild(7).gameObject;
-        if (AdsInitializer.Instance.isRevived)
+        if (OldAdManager.Instance.isRevived)
         {
             Revive();
         }
@@ -183,33 +183,33 @@ public class PlayerController : MonoBehaviour
         GameObject[] c = GameObject.FindGameObjectsWithTag("Coin");
         foreach (GameObject obstacle in x)
         {
-            if (obstacle.transform.position.z <= AdsInitializer.Instance.playerPos.z)
+            if (obstacle.transform.position.z <= OldAdManager.Instance.playerPos.z)
             {
                 obstacle.SetActive(false);
             }
         }
         foreach (GameObject obstacle in y)
         {
-            if (obstacle.transform.position.z <= AdsInitializer.Instance.playerPos.z)
+            if (obstacle.transform.position.z <= OldAdManager.Instance.playerPos.z)
             {
                 obstacle.SetActive(false);
             }
         }
         foreach (GameObject obstacle in z)
         {
-            if (obstacle.transform.position.z <= AdsInitializer.Instance.playerPos.z)
+            if (obstacle.transform.position.z <= OldAdManager.Instance.playerPos.z)
             {
                 obstacle.SetActive(false);
             }
         }
         foreach (GameObject obstacle in c)
         {
-            if (obstacle.transform.position.z <= AdsInitializer.Instance.playerPos.z)
+            if (obstacle.transform.position.z <= OldAdManager.Instance.playerPos.z)
             {
                 obstacle.SetActive(false);
             }
         }
-        revivePos = AdsInitializer.Instance.playerPos + reviveOffset;
+        revivePos = OldAdManager.Instance.playerPos + reviveOffset;
         if(revivePos.z < shotPosZ)
         {
             transform.position = revivePos;
@@ -219,9 +219,9 @@ public class PlayerController : MonoBehaviour
             revivePos.z = shotPosZ - 10;
             transform.position = revivePos;
         }
-        gameManager._coins = AdsInitializer.Instance.reviveCoins;
-        AdsInitializer.Instance.reviveCoins = 0;
-        AdsInitializer.Instance.isRevived = false;
+        gameManager.AddCoin(OldAdManager.Instance.reviveCoins);
+        OldAdManager.Instance.reviveCoins = 0;
+        OldAdManager.Instance.isRevived = false;
         menu.SetActive(false);
         revive.SetActive(true);
     }

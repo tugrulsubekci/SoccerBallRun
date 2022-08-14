@@ -14,17 +14,12 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject levelCompletedPanel;
     [SerializeField] ParticleSystem[] confeties;
 
-    private ReviveButton rewardedAdsButton1;
-    private SkipLevelButton rewardedAdsButton2;
-
-    private InterstitialAds interstitialAds;
+    private InterstitialAdvertisement interstitialAds;
     private void Start()
     {
         coinText.text = (DataManager.Instance.coins + _coins).ToString();
         levelText.text = $"LEVEL {DataManager.Instance.levelNumber + 1}";
-        rewardedAdsButton1 = gameOverPanel.transform.GetChild(1).GetComponent<ReviveButton>();
-        rewardedAdsButton2 = gameOverPanel.transform.GetChild(3).GetComponent<SkipLevelButton>();
-        interstitialAds = GetComponent<InterstitialAds>();
+        interstitialAds = GetComponent<InterstitialAdvertisement>();
     }
     public void AddCoin(int amount)
     {
@@ -47,8 +42,6 @@ public class GameManager : MonoBehaviour
         GameObject tapToShootText = levelCompletedPanel.transform.parent.GetChild(6).gameObject;
         tapToShootText.SetActive(false);
         gameOverPanel.SetActive(true);
-        rewardedAdsButton1.LoadAd();
-        rewardedAdsButton2.LoadAd();
     }
 
     public void LevelCompleted()
@@ -72,7 +65,6 @@ public class GameManager : MonoBehaviour
 
         if(DataManager.Instance.levelIndex % 2 - 1 == 0)
         {
-            interstitialAds.LoadAd();
             interstitialAds.ShowAd();
         }
 

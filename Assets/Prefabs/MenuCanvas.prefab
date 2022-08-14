@@ -4880,7 +4880,7 @@ GameObject:
   - component: {fileID: 5776442040170195024}
   - component: {fileID: 5776442040170195031}
   - component: {fileID: 5776442040170195030}
-  - component: {fileID: 2530751815351399910}
+  - component: {fileID: 2525580266003737054}
   m_Layer: 5
   m_Name: ReviveButton
   m_TagString: Untagged
@@ -4992,7 +4992,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &2530751815351399910
+--- !u!114 &2525580266003737054
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5001,12 +5001,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 5776442040170195028}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e8af55689bd3a046929ef341ab1dec8, type: 3}
+  m_Script: {fileID: 11500000, guid: e277c8b3ba3dc2c48b6d4058a3c132cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _showAdButton: {fileID: 5776442040170195030}
-  _androidAdUnitId: Rewarded_Android
-  _iOSAdUnitId: Rewarded_iOS
   player: {fileID: 0}
 --- !u!1 &5776442040189400355
 GameObject:
@@ -6632,7 +6629,7 @@ GameObject:
   - component: {fileID: 5776442040805111571}
   - component: {fileID: 5776442040805111570}
   - component: {fileID: 5776442040805111569}
-  - component: {fileID: 811304192}
+  - component: {fileID: 1154776826047203139}
   m_Layer: 5
   m_Name: SkipLevelButton
   m_TagString: Untagged
@@ -6744,7 +6741,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &811304192
+--- !u!114 &1154776826047203139
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -6753,12 +6750,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 5776442040805111575}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 37a0aabe89290bc4389485c192e4515f, type: 3}
+  m_Script: {fileID: 11500000, guid: 00a6dc4f775151b42828efa1d377546c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _showAdButton: {fileID: 5776442040805111569}
-  _androidAdUnitId: Rewarded_Android
-  _iOSAdUnitId: Rewarded_iOS
 --- !u!1 &5776442040833355171
 GameObject:
   m_ObjectHideFlags: 0

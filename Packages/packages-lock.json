@@ -1,14 +1,5 @@
 {
   "dependencies": {
-    "com.unity.ads": {
-      "version": "3.7.5",
-      "depth": 0,
-      "source": "registry",
-      "dependencies": {
-        "com.unity.ugui": "1.0.0"
-      },
-      "url": "https://packages.unity.com"
-    },
     "com.unity.burst": {
       "version": "1.6.5",
       "depth": 1,
@@ -132,14 +123,16 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.services.mediation": {
-      "version": "file:C:/Users/aykud/Desktop/UNITY/98231542a8b0e65db4a115744545fdbf17d77371.tgz",
+      "version": "0.5.1-preview.1",
       "depth": 0,
-      "source": "local-tarball",
+      "source": "registry",
       "dependencies": {
         "com.unity.settings-manager": "1.0.3",
         "com.unity.modules.ui": "1.0.0",
-        "com.unity.services.core": "1.4.0"
-      }
+        "com.unity.services.core": "1.4.0",
+        "com.unity.ugui": "1.0.0"
+      },
+      "url": "https://packages.unity.com"
     },
     "com.unity.settings-manager": {
       "version": "1.0.3",

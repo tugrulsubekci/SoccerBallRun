@@ -35,23 +35,9 @@ public class MenuManager : MonoBehaviour
     {
         gameManager = FindObjectOfType<GameManager>();
 
-        smallerBallLevel += DataManager.Instance.smallerSkill_Level;
-        smallerBallCost = smallerBallLevel * 10;
-        smallerBallLevelText.text = $"LEVEL {smallerBallLevel}";
-        smallerBallCostText.text = smallerBallCost.ToString();
-        for (int i = 0; i < smallerBallLevel; i++)
-        {
-            ball.transform.localScale /= 1.05f;
-        }
+        UpdateSmaller();
 
-        largerGoalLevel += DataManager.Instance.largerSkill_Level;
-        largerGoalCost = largerGoalLevel * 10;
-        largerGoalCostText.text = largerGoalCost.ToString();
-        largerGoalLevelText.text = $"LEVEL {largerGoalLevel}";
-        for (int i = 0; i < largerGoalLevel; i++)
-        {
-            goal.transform.localScale *= 1.05f;
-        }
+        UpdateLarger();
 
         if(DataManager.Instance.isMusicOn)
         {
@@ -63,20 +49,12 @@ public class MenuManager : MonoBehaviour
         }
 
     }
-
-    private void Update()
-    {
-        if (gameManager.isGameStarted && Input.GetMouseButtonDown(0))
-        {
-            instructionalObjects.SetActive(false);
-        }
-    }
-
     public void StartGame()
     {
         FindObjectOfType<AudioManager>().Play("Start");        
-        if (DataManager.Instance.levelNumber == 0)
+        if (DataManager.Instance.levelNumber == 0 && !DataManager.Instance.isDisplayed)
         {
+            DataManager.Instance.isDisplayed = true;
             instructionalObjects.SetActive(true);
         }
         menuObjects.SetActive(false);
@@ -88,15 +66,16 @@ public class MenuManager : MonoBehaviour
     }
     public void SmallerBall()
     {
-        if (DataManager.Instance.coins + gameManager._coins >= smallerBallCost)
+        if (gameManager.HasEnoughCoins(smallerBallCost))
         {
             ball.transform.localScale /= 1.05f;
 
             smallerBallLevel++;
             smallerBallLevelText.text = $"LEVEL {smallerBallLevel}";
 
-            gameManager.AddCoin(-smallerBallCost);
+            gameManager.BuyItem(smallerBallCost);
             LevelUp(nameof(SmallerBall));
+            
 
             smallerBallCost = smallerBallLevel * 10;
             smallerBallCostText.text = smallerBallCost.ToString();
@@ -105,14 +84,14 @@ public class MenuManager : MonoBehaviour
 
     public void LargerGoal()
     {
-        if (DataManager.Instance.coins + gameManager._coins >= largerGoalCost)
+        if (gameManager.HasEnoughCoins(largerGoalCost))
         {
             goal.transform.localScale *= 1.05f;
 
             largerGoalLevel++;
             largerGoalLevelText.text = $"LEVEL {largerGoalLevel}";
 
-            gameManager.AddCoin(-largerGoalCost);
+            gameManager.BuyItem(largerGoalCost);
             LevelUp(nameof(LargerGoal));
 
             largerGoalCost = largerGoalLevel * 10;
@@ -127,7 +106,7 @@ public class MenuManager : MonoBehaviour
     {
         if(DataManager.Instance.levelIndex < 10)
         {
-            SceneManager.LoadScene(DataManager.Instance.levelIndex + 1);
+            SceneManager.LoadScene(DataManager.Instance.levelIndex);
         }
         else if (DataManager.Instance.levelIndex == 10)
         {
@@ -204,6 +183,30 @@ public class MenuManager : MonoBehaviour
             DataManager.Instance.coins += gameManager._coins;
             DataManager.Instance.smallerSkill_Level++;
             DataManager.Instance.Save();
+        }
+    }
+
+    private void UpdateSmaller()
+    {
+        smallerBallLevel += DataManager.Instance.smallerSkill_Level;
+        smallerBallCost = smallerBallLevel * 10;
+        smallerBallLevelText.text = $"LEVEL {smallerBallLevel}";
+        smallerBallCostText.text = smallerBallCost.ToString();
+        for (int i = 0; i < smallerBallLevel; i++)
+        {
+            ball.transform.localScale /= 1.05f;
+        }
+    }
+
+    private void UpdateLarger()
+    {
+        largerGoalLevel += DataManager.Instance.largerSkill_Level;
+        largerGoalCost = largerGoalLevel * 10;
+        largerGoalCostText.text = largerGoalCost.ToString();
+        largerGoalLevelText.text = $"LEVEL {largerGoalLevel}";
+        for (int i = 0; i < largerGoalLevel; i++)
+        {
+            goal.transform.localScale *= 1.05f;
         }
     }
 }

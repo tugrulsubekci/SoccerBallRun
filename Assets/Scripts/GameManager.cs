@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
     private InterstitialAds interstitialAds;
     private void Start()
     {
-        coinText.text = DataManager.Instance.coins.ToString();
+        coinText.text = (DataManager.Instance.coins + _coins).ToString();
         levelText.text = $"LEVEL {DataManager.Instance.levelNumber + 1}";
         rewardedAdsButton1 = gameOverPanel.transform.GetChild(1).GetComponent<ReviveButton>();
         rewardedAdsButton2 = gameOverPanel.transform.GetChild(3).GetComponent<SkipLevelButton>();

@@ -1,4 +1,6 @@
 using UnityEngine;
+using GameAnalyticsSDK;
+using Facebook.Unity;
 
 public class FrameRate : MonoBehaviour
 {
@@ -6,5 +8,18 @@ public class FrameRate : MonoBehaviour
     private void Awake()
     {
         Application.targetFrameRate = frameRate;
+        GameAnalytics.Initialize();
+        if (FB.IsInitialized)
+        {
+            FB.ActivateApp();
+        }
+        else
+        {
+            //Handle FB.Init
+            FB.Init(() =>
+            {
+                FB.ActivateApp();
+            });
+        }
     }
 }

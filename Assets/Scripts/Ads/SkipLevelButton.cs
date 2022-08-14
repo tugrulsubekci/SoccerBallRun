@@ -66,7 +66,7 @@ public class SkipLevelButton : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsSh
             DataManager.Instance.Save();
             if (DataManager.Instance.levelIndex < 10)
             {
-                SceneManager.LoadScene(DataManager.Instance.levelIndex + 1);
+                SceneManager.LoadScene(DataManager.Instance.levelIndex);
             }
             else if (DataManager.Instance.levelIndex == 10)
             {

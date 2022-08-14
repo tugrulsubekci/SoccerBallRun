@@ -30,7 +30,7 @@ MonoBehaviour:
   secretKey:
   - a99bf5663af2e0eebba1dbaba3e23260a10de336
   Build:
-  - 0.1
+  - 0.2
   SelectedPlatformOrganization:
   - tugrulsubekci
   SelectedPlatformStudio:
@@ -40,7 +40,7 @@ MonoBehaviour:
   SelectedPlatformGameID: fd490300
   SelectedOrganization: 01000000
   SelectedStudio: 01000000
-  SelectedGame: 02000000
+  SelectedGame: 01000000
   NewVersion: 
   Changes: 
   SignUpOpen: 0

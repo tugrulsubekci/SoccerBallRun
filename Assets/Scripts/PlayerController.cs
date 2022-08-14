@@ -21,9 +21,13 @@ public class PlayerController : MonoBehaviour
 
     private bool isCameraPositionOkay;
     [SerializeField] GameObject tapToShootText;
+    private GameObject menu;
+    private GameObject revive;
 
     private GameManager gameManager;
     private Vector3 _direction;
+    private Vector3 revivePos;
+    private Vector3 reviveOffset = new Vector3(0, 0, -10);
 
     [SerializeField] ParticleSystem explosionParticle;
     // Start is called before the first frame update
@@ -32,6 +36,8 @@ public class PlayerController : MonoBehaviour
         gameManager = FindObjectOfType<GameManager>();
         playerRigidbody = GetComponent<Rigidbody>();
         shotPosZ = Goal.transform.position.z - distanceFromBall;
+        menu = tapToShootText.transform.parent.GetChild(0).gameObject;
+        revive = tapToShootText.transform.parent.GetChild(7).gameObject;
         if (AdsInitializer.Instance.isRevived)
         {
             Revive();
@@ -203,7 +209,7 @@ public class PlayerController : MonoBehaviour
                 obstacle.SetActive(false);
             }
         }
-        Vector3 revivePos = AdsInitializer.Instance.playerPos + new Vector3(0, 0, -10);
+        revivePos = AdsInitializer.Instance.playerPos + reviveOffset;
         if(revivePos.z < shotPosZ)
         {
             transform.position = revivePos;
@@ -214,7 +220,10 @@ public class PlayerController : MonoBehaviour
             transform.position = revivePos;
         }
         gameManager._coins = AdsInitializer.Instance.reviveCoins;
+        AdsInitializer.Instance.reviveCoins = 0;
         AdsInitializer.Instance.isRevived = false;
+        menu.SetActive(false);
+        revive.SetActive(true);
     }
     IEnumerator CheckShoot()
     {

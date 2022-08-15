@@ -63,10 +63,7 @@ public class GameManager : MonoBehaviour
             confeties[i].Play();
         }
 
-        if(DataManager.Instance.levelIndex % 2 - 1 == 0)
-        {
-            interstitialAds.ShowAd();
-        }
+        interstitialAds.ShowAd();
 
         DataManager.Instance.coins += _coins;
         DataManager.Instance.levelIndex++;

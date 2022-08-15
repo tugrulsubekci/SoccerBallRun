@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GoalController : MonoBehaviour
@@ -10,12 +8,14 @@ public class GoalController : MonoBehaviour
     [SerializeField] float moveSpeed = 2;
 
     private PlayerController playerController;
+    private Transform goTransform;
     private void Start()
     {
+        goTransform = gameObject.transform;
         playerController = FindObjectOfType<PlayerController>();
     }
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if(playerController.isPositionOkay)
         {
@@ -26,12 +26,16 @@ public class GoalController : MonoBehaviour
     {
         if (isRight)
         {
-            gameObject.transform.Translate(moveSpeed * Time.deltaTime * Vector3.forward);
+            goTransform.Translate(moveSpeed * Time.fixedDeltaTime * Vector3.forward);
         }
-        if (isLeft)
+        else
         {
-            gameObject.transform.Translate(moveSpeed * Time.deltaTime * Vector3.back);
+            goTransform.Translate(moveSpeed * Time.fixedDeltaTime * Vector3.back);
         }
+        CheckPosition();
+    }
+    private void CheckPosition()
+    {
         if (transform.position.x <= -3.5)
         {
             isLeft = true;

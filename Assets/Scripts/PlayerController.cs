@@ -1,10 +1,10 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
     private Rigidbody playerRigidbody;
+    private Transform playerTrans;
     [SerializeField] float forwardVelocity = 4;
 
     public float horizontalInput;
@@ -47,11 +47,11 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (transform.position.z < shotPosZ)
+        if (playerTrans.position.z < shotPosZ)
         {
             MovePlayer();
         }
-        else if (transform.position.z >= shotPosZ)
+        else if (playerTrans.position.z >= shotPosZ)
         {
             StartCoroutine(CameraPosition());
             if (!isShooted)

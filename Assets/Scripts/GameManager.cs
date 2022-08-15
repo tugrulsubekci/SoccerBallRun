@@ -24,6 +24,11 @@ public class GameManager : MonoBehaviour
     public void AddCoin(int amount)
     {
         _coins += amount;
+        RefreshCoinText();
+    }
+
+    public void RefreshCoinText()
+    {
         coinText.text = (DataManager.Instance.coins + _coins).ToString();
     }
     public void BuyItem(int price)

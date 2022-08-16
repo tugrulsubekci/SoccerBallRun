@@ -35,6 +35,7 @@ public class PlayerController : MonoBehaviour
     {
         gameManager = FindObjectOfType<GameManager>();
         playerRigidbody = GetComponent<Rigidbody>();
+        playerTrans = GetComponent<Transform>();
         shotPosZ = Goal.transform.position.z - distanceFromBall;
         menu = tapToShootText.transform.parent.GetChild(0).gameObject;
         revive = tapToShootText.transform.parent.GetChild(7).gameObject;

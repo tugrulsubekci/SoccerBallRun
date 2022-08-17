@@ -1,7 +1,6 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
-
 public class MenuManager : MonoBehaviour
 {
     [SerializeField] GameObject instructionalObjects;
@@ -27,7 +26,7 @@ public class MenuManager : MonoBehaviour
     private GameManager gameManager;
     private void Awake()
     {
-        shopPanel.SetActive(true);
+        shopPanel.SetActive(true);    
     }
     private void Start()
     {

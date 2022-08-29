@@ -1,6 +1,8 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
+using UnityEditor.SceneManagement;
+
 public class MenuManager : MonoBehaviour
 {
     [SerializeField] GameObject instructionalObjects;
@@ -24,6 +26,7 @@ public class MenuManager : MonoBehaviour
     private int largerGoalCost;
 
     private GameManager gameManager;
+    private Camera mainCamera;
     private void Awake()
     {
         shopPanel.SetActive(true);    
@@ -31,6 +34,7 @@ public class MenuManager : MonoBehaviour
     private void Start()
     {
         gameManager = FindObjectOfType<GameManager>();
+        mainCamera = Camera.main;
 
         UpdateSmaller();
 
@@ -160,10 +164,14 @@ public class MenuManager : MonoBehaviour
         if(!shopPanel.activeInHierarchy)
         {
             shopPanel.SetActive(true);
+            menuObjects.SetActive(false);
+            mainCamera.cullingMask = 0;
         }
         else
         {
             shopPanel.SetActive(false);
+            menuObjects.SetActive(true);
+            mainCamera.cullingMask = -1;
         }
     }
     private void LevelUp(string skillName)

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4244573258333931422}
   - component: {fileID: 4244573258333931420}
   - component: {fileID: 4244573258333931421}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -74,12 +74,12 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 2
+  m_CollisionDetection: 1
 --- !u!135 &4244573258333931421
 SphereCollider:
   m_ObjectHideFlags: 0

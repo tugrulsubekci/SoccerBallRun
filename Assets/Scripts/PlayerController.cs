@@ -5,7 +5,7 @@ public class PlayerController : MonoBehaviour
 {
     private Rigidbody playerRigidbody;
     private Transform playerTrans;
-    [SerializeField] float forwardVelocity = 4;
+    [SerializeField] float forwardVelocity = 3;
 
     public float horizontalInput;
     [SerializeField] float movementSpeed = 5;
@@ -25,6 +25,7 @@ public class PlayerController : MonoBehaviour
     private GameObject revive;
 
     private GameManager gameManager;
+    private Camera mainCamera;
     private Vector3 _direction;
     private Vector3 revivePos;
     private Vector3 reviveOffset = new Vector3(0, 0, -10);
@@ -36,6 +37,7 @@ public class PlayerController : MonoBehaviour
         gameManager = FindObjectOfType<GameManager>();
         playerRigidbody = GetComponent<Rigidbody>();
         playerTrans = GetComponent<Transform>();
+        mainCamera = Camera.main;
         shotPosZ = Goal.transform.position.z - distanceFromBall;
         menu = tapToShootText.transform.parent.GetChild(0).gameObject;
         revive = tapToShootText.transform.parent.GetChild(7).gameObject;
@@ -69,11 +71,11 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetMouseButton(0))
         {
-            if (Input.mousePosition.x > Camera.main.WorldToScreenPoint(transform.position).x)
+            if (Input.mousePosition.x > mainCamera.WorldToScreenPoint(transform.position).x)
             {
                 _direction = Vector3.right;
             }
-            else if (Input.mousePosition.x < Camera.main.WorldToScreenPoint(transform.position).x)
+            else if (Input.mousePosition.x < mainCamera.WorldToScreenPoint(transform.position).x)
             {
                 _direction = Vector3.left;
             }

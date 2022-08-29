@@ -87,51 +87,51 @@ public class SkipLevelAdButton : MonoBehaviour
 
     void InitializationFailed(Exception e)
     {
-        Debug.Log("Initialization Failed: " + e.Message);
+        // Debug.Log("Initialization Failed: " + e.Message);
     }
 
     void AdLoaded(object sender, EventArgs e)
     {
-        Debug.Log("Ad loaded");
+        // Debug.Log("Ad loaded");
     }
 
     void AdFailedLoad(object sender, LoadErrorEventArgs e)
     {
-        Debug.Log("Failed to load ad");
-        Debug.Log(e.Message);
+        // Debug.Log("Failed to load ad");
+        // Debug.Log(e.Message);
     }
 
     void AdShown()
     {
-        Debug.Log("Ad shown!");
+        // Debug.Log("Ad shown!");
     }
 
     void AdClosed(object sender, EventArgs e)
     {
-        Debug.Log("Ad has closed");
+        // Debug.Log("Ad has closed");
         // Execute logic after an ad has been closed.
     }
 
     void AdClicked(object sender, EventArgs e)
     {
-        Debug.Log("Ad has been clicked");
+        // Debug.Log("Ad has been clicked");
         // Execute logic after an ad has been clicked.
     }
 
     void AdFailedShow(ShowFailedException e)
     {
-        Debug.Log(e.Message);
+        // Debug.Log(e.Message);
     }
 
     void ImpressionEvent(object sender, ImpressionEventArgs args)
     {
         var impressionData = args.ImpressionData != null ? JsonUtility.ToJson(args.ImpressionData, true) : "null";
-        Debug.Log("Impression event from ad unit id " + args.AdUnitId + " " + impressionData);
+        // Debug.Log("Impression event from ad unit id " + args.AdUnitId + " " + impressionData);
     }
 
     void UserRewarded(object sender, RewardEventArgs e)
     {
-        Debug.Log($"Received reward: type:{e.Type}; amount:{e.Amount}");
+        // Debug.Log($"Received reward: type:{e.Type}; amount:{e.Amount}");
         DataManager.Instance.levelIndex++;
         DataManager.Instance.levelNumber++;
         DataManager.Instance.Save();

@@ -83,10 +83,6 @@ public class Shop : MonoBehaviour
             gameManager.BuyItem(Items[itemIndex].price);
             UpdateShopData();
         }
-        else
-        {
-            Debug.Log("No enough coins!!");
-        }
     }
     void OnSelectBtnClicked(int itemIndex)
     {

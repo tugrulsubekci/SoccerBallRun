@@ -135,7 +135,7 @@ public class ReviveAdButton : MonoBehaviour
     void UserRewarded(object sender, RewardEventArgs e)
     {
         // Debug.Log($"Received reward: type:{e.Type}; amount:{e.Amount}");
-        OldAdManager.Instance.playerPos = player.transform.position;
+        OldAdManager.Instance.playerPos = new Vector3(0, 0.75f ,player.transform.position.z);
         OldAdManager.Instance.isRevived = true;
         OldAdManager.Instance.reviveCoins = gameManager._coins;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);

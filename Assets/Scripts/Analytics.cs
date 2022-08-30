@@ -4,7 +4,7 @@ using Facebook.Unity;
 
 public class Analytics : MonoBehaviour
 {
-    private int frameRate = 60;
+    private int frameRate = 30;
     private void Awake()
     {
         Application.targetFrameRate = frameRate;

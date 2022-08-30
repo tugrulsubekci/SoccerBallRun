@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
 
     public float horizontalInput;
     [SerializeField] float movementSpeed = 5;
+    private float rotationSpeed = 360;
 
     private float xRange = 4;
 
@@ -26,12 +27,17 @@ public class PlayerController : MonoBehaviour
 
     private GameManager gameManager;
     private Camera mainCamera;
-    private Vector3 _direction;
+    private float _direction;
+    private float right = 1;
+    private float left = -1;
+    private float zero = 0;
+    private Vector3 deltaPosition;
+    private Quaternion deltaRotation;
     private Vector3 revivePos;
     private Vector3 reviveOffset = new Vector3(0, 0, -10);
-
+    private PhysicMaterial bouncyMaterial;
     [SerializeField] ParticleSystem explosionParticle;
-    // Start is called before the first frame update
+
     void Start()
     {
         gameManager = FindObjectOfType<GameManager>();
@@ -41,13 +47,15 @@ public class PlayerController : MonoBehaviour
         shotPosZ = Goal.transform.position.z - distanceFromBall;
         menu = tapToShootText.transform.parent.GetChild(0).gameObject;
         revive = tapToShootText.transform.parent.GetChild(7).gameObject;
+        deltaPosition = new Vector3(0,0,forwardVelocity);
+        deltaRotation = Quaternion.Euler(rotationSpeed * Time.fixedDeltaTime * Vector3.right);
+        bouncyMaterial = gameObject.GetComponent<SphereCollider>().material;
         if (OldAdManager.Instance.isRevived)
         {
             Revive();
         }
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
         if (playerTrans.position.z < shotPosZ)
@@ -71,27 +79,30 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetMouseButton(0))
         {
-            if (Input.mousePosition.x > mainCamera.WorldToScreenPoint(transform.position).x)
+            if (Input.mousePosition.x > mainCamera.WorldToScreenPoint(playerTrans.position).x)
             {
-                _direction = Vector3.right;
+                _direction = right;
             }
-            else if (Input.mousePosition.x < mainCamera.WorldToScreenPoint(transform.position).x)
+            else if (Input.mousePosition.x < mainCamera.WorldToScreenPoint(playerTrans.position).x)
             {
-                _direction = Vector3.left;
+                _direction = left;
             }
             else
             {
-                _direction = Vector3.zero;
+                _direction = zero;
             }
         }
         else
         {
-            _direction = Vector3.zero;
+            _direction = zero;
         }
 
         if (isPositionOkay && !isShooted)
         {
-            playerRigidbody.constraints = RigidbodyConstraints.FreezePositionY;
+            if(playerRigidbody.collisionDetectionMode != CollisionDetectionMode.ContinuousDynamic)
+            {
+                playerRigidbody.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
+            }
             // Keyboard shoot
             /*if (Input.GetKeyDown(KeyCode.Space) && isCameraPositionOkay)
             {   
@@ -101,10 +112,12 @@ public class PlayerController : MonoBehaviour
             }*/
             if (Input.GetMouseButtonDown(0) && isCameraPositionOkay)
             {
+                bouncyMaterial.bounciness = 0;
                 FindObjectOfType<AudioManager>().Play("Shoot");
                 playerRigidbody.AddForce(Vector3.forward * shotPower, ForceMode.Impulse);
                 isShooted = true;
                 StartCoroutine(CheckShoot());
+                Debug.Log("x");
             }
         }
     }
@@ -122,8 +135,15 @@ public class PlayerController : MonoBehaviour
     {
         if (gameManager.isGameStarted)
         {
-            horizontalInput = _direction.x * movementSpeed;
-            playerRigidbody.velocity = new Vector3(horizontalInput, playerRigidbody.velocity.y, forwardVelocity);
+            //Move Ball
+            horizontalInput = _direction * movementSpeed;
+            deltaPosition.x = horizontalInput;
+            playerRigidbody.MovePosition(playerTrans.position + Time.fixedDeltaTime * deltaPosition);
+
+            //playerRigidbody.velocity = new Vector3(horizontalInput, playerRigidbody.velocity.y, forwardVelocity);
+
+            // Roll ball
+            playerRigidbody.MoveRotation(playerRigidbody.rotation * deltaRotation);
         }
         else if(!gameManager.isGameStarted)
         {
@@ -215,12 +235,12 @@ public class PlayerController : MonoBehaviour
         revivePos = OldAdManager.Instance.playerPos + reviveOffset;
         if(revivePos.z < shotPosZ)
         {
-            transform.position = revivePos;
+            playerRigidbody.MovePosition(revivePos);
         }
         else if(revivePos.z >= shotPosZ)
         {
             revivePos.z = shotPosZ - 10;
-            transform.position = revivePos;
+            playerRigidbody.MovePosition(revivePos);
         }
         gameManager.AddCoin(OldAdManager.Instance.reviveCoins);
         OldAdManager.Instance.reviveCoins = 0;

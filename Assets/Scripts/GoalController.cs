@@ -6,15 +6,20 @@ public class GoalController : MonoBehaviour
     private bool isLeft = false;
 
     [SerializeField] float moveSpeed = 2;
+    private float xBound = 3.2f;
 
     private PlayerController playerController;
-    private Transform goTransform;
-    private void Start()
+    private Rigidbody goRigidbody;
+    private Transform goTrans;
+    private Vector3 deltaPos;
+    private void Awake()
     {
-        goTransform = gameObject.transform;
+        deltaPos = new Vector3(moveSpeed * Time.fixedDeltaTime, 0,0);
+        goRigidbody = gameObject.GetComponent<Rigidbody>();
+        goTrans = transform;
         playerController = FindObjectOfType<PlayerController>();
     }
-    // Update is called once per frame
+
     void FixedUpdate()
     {
         if(playerController.isPositionOkay)
@@ -22,26 +27,28 @@ public class GoalController : MonoBehaviour
             Move();
         }
     }
+
     private void Move()
     {
         if (isRight)
         {
-            goTransform.Translate(moveSpeed * Time.fixedDeltaTime * Vector3.forward);
+            goRigidbody.MovePosition(goTrans.position - deltaPos);
         }
         else
         {
-            goTransform.Translate(moveSpeed * Time.fixedDeltaTime * Vector3.back);
+            goRigidbody.MovePosition(goTrans.position + deltaPos);
         }
         CheckPosition();
     }
+
     private void CheckPosition()
     {
-        if (transform.position.x <= -3.5)
+        if (transform.position.x <= -xBound)
         {
             isLeft = true;
             isRight = false;
         }
-        if (transform.position.x >= 3.5)
+        if (transform.position.x >= xBound)
         {
             isLeft = false;
             isRight = true;

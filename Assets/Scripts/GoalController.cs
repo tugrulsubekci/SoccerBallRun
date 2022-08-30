@@ -43,12 +43,12 @@ public class GoalController : MonoBehaviour
 
     private void CheckPosition()
     {
-        if (transform.position.x <= -xBound)
+        if (goTrans.position.x <= -xBound)
         {
             isLeft = true;
             isRight = false;
         }
-        if (transform.position.x >= xBound)
+        if (goTrans.position.x >= xBound)
         {
             isLeft = false;
             isRight = true;

@@ -5,10 +5,12 @@ public class RefreshCoinText : MonoBehaviour
 {
     private TextMeshProUGUI coinText;
     private TextMeshProUGUI gamePlayCoinText;
+
     private void OnEnable()
     {
         RefreshText();
     }
+
     public void RefreshText()
     {
         coinText = transform.GetChild(5).GetChild(1).GetComponent<TextMeshProUGUI>();

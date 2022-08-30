@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour
     private GameObject revive;
 
     private GameManager gameManager;
+    private AudioManager audioManager;
     private Camera mainCamera;
     private float _direction;
     private float right = 1;
@@ -41,6 +42,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         gameManager = FindObjectOfType<GameManager>();
+        audioManager = FindObjectOfType<AudioManager>();
         playerRigidbody = GetComponent<Rigidbody>();
         playerTrans = GetComponent<Transform>();
         mainCamera = Camera.main;
@@ -113,11 +115,10 @@ public class PlayerController : MonoBehaviour
             if (Input.GetMouseButtonDown(0) && isCameraPositionOkay)
             {
                 bouncyMaterial.bounciness = 0;
-                FindObjectOfType<AudioManager>().Play("Shoot");
+                audioManager.Play("Shoot");
                 playerRigidbody.AddForce(Vector3.forward * shotPower, ForceMode.Impulse);
                 isShooted = true;
                 StartCoroutine(CheckShoot());
-                Debug.Log("x");
             }
         }
     }
@@ -153,27 +154,27 @@ public class PlayerController : MonoBehaviour
 
     void CheckPosition()
     {
-        if (transform.position.x > xRange)
+        if (playerTrans.position.x > xRange)
         {
-            transform.position = new Vector3(xRange, transform.position.y, transform.position.z);
+            playerTrans.position = new Vector3(xRange, playerTrans.position.y, playerTrans.position.z);
         }
-        if (transform.position.x < -xRange)
+        if (playerTrans.position.x < -xRange)
         {
-            transform.position = new Vector3(-xRange, transform.position.y, transform.position.z);
+            playerTrans.position = new Vector3(-xRange, playerTrans.position.y, playerTrans.position.z);
         }
     }
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("SmallBall"))
         {
-            FindObjectOfType<AudioManager>().Play("SmallBall");
+            audioManager.Play("SmallBall");
             transform.localScale = transform.localScale / 1.2f;
             other.gameObject.GetComponent<Animator>().SetBool("isDestroyed", true);
             Destroy(other.gameObject, 0.6f);
         }
         if (other.CompareTag("BigBall"))
         {
-            FindObjectOfType<AudioManager>().Play("BigBall");
+            audioManager.Play("BigBall");
             transform.localScale = transform.localScale * 1.2f;
             other.gameObject.GetComponent<Animator>().SetBool("isDestroyed", true);
             Destroy(other.gameObject, 0.6f);
@@ -183,7 +184,7 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Obstacle"))
         {
-            FindObjectOfType<AudioManager>().Play("BallExplosion");
+            audioManager.Play("BallExplosion");
             gameObject.SetActive(false);
             Instantiate(explosionParticle, transform.position, transform.rotation);
             gameManager.GameOver();
@@ -195,7 +196,7 @@ public class PlayerController : MonoBehaviour
         }
         else if (collision.gameObject.CompareTag("Ground"))
         {
-            FindObjectOfType<AudioManager>().Play("Bounce");
+            audioManager.Play("Bounce");
         }
     }
     private void Revive()
@@ -242,11 +243,11 @@ public class PlayerController : MonoBehaviour
             revivePos.z = shotPosZ - 10;
             playerRigidbody.MovePosition(revivePos);
         }
-        gameManager.AddCoin(OldAdManager.Instance.reviveCoins);
         OldAdManager.Instance.reviveCoins = 0;
         OldAdManager.Instance.isRevived = false;
         menu.SetActive(false);
         revive.SetActive(true);
+        gameManager.AddCoin(OldAdManager.Instance.reviveCoins);
     }
     IEnumerator CheckShoot()
     {

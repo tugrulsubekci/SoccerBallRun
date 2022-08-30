@@ -1,7 +1,6 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
-using UnityEditor.SceneManagement;
 
 public class MenuManager : MonoBehaviour
 {
@@ -26,6 +25,7 @@ public class MenuManager : MonoBehaviour
     private int largerGoalCost;
 
     private GameManager gameManager;
+    private AudioManager audioManager;
     private Camera mainCamera;
     private void Awake()
     {
@@ -34,6 +34,7 @@ public class MenuManager : MonoBehaviour
     private void Start()
     {
         gameManager = FindObjectOfType<GameManager>();
+        audioManager = FindObjectOfType<AudioManager>();
         mainCamera = Camera.main;
 
         UpdateSmaller();
@@ -52,7 +53,7 @@ public class MenuManager : MonoBehaviour
     }
     public void StartGame()
     {
-        FindObjectOfType<AudioManager>().Play("Start");        
+        audioManager.Play("Start");        
         if (DataManager.Instance.levelNumber == 0 && !DataManager.Instance.isDisplayed)
         {
             DataManager.Instance.isDisplayed = true;
@@ -118,7 +119,7 @@ public class MenuManager : MonoBehaviour
     }
     public void SettingsButton()
     {
-        FindObjectOfType<AudioManager>().Play("Click");
+        audioManager.Play("Click");
         if (settingsObjects.activeInHierarchy)
         {
             settingsObjects.SetActive(false);
@@ -130,7 +131,7 @@ public class MenuManager : MonoBehaviour
     }
     public void Mute()
     {
-        FindObjectOfType<AudioManager>().Play("Click");
+        audioManager.Play("Click");
         if (mute.activeInHierarchy)
         {
             DataManager.Instance.isMusicOn = true;
@@ -145,7 +146,7 @@ public class MenuManager : MonoBehaviour
     }
     public void Vibration()
     {
-        FindObjectOfType<AudioManager>().Play("Click");
+        audioManager.Play("Click");
         if (vibration.activeInHierarchy)
         {
             DataManager.Instance.isVibrationOn = true;
@@ -160,7 +161,7 @@ public class MenuManager : MonoBehaviour
     }
     public void ShopButton()
     {
-        FindObjectOfType<AudioManager>().Play("Click");
+        audioManager.Play("Click");
         if(!shopPanel.activeInHierarchy)
         {
             shopPanel.SetActive(true);
@@ -176,7 +177,7 @@ public class MenuManager : MonoBehaviour
     }
     private void LevelUp(string skillName)
     {
-        FindObjectOfType<AudioManager>().Play("LevelUp");
+        audioManager.Play("LevelUp");
         if (skillName == "LargerGoal")
         {
             DataManager.Instance.coins += gameManager._coins;

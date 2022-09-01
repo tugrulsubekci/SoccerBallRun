@@ -5,7 +5,7 @@ public class Rolling : MonoBehaviour
 {
     private Transform playerTrans;
     private Vector3 rotation = new Vector3(360, 0, 0);
-    private float duration = 1;
+    private float duration = 1.2f;
     private void OnEnable()
     {
         playerTrans = transform;

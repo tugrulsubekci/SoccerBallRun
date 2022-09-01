@@ -27,6 +27,7 @@ public class MenuManager : MonoBehaviour
     private GameManager gameManager;
     private AudioManager audioManager;
     private Camera mainCamera;
+    private GameObject player;
     private void Awake()
     {
         shopPanel.SetActive(true);    
@@ -36,6 +37,7 @@ public class MenuManager : MonoBehaviour
         gameManager = FindObjectOfType<GameManager>();
         audioManager = FindObjectOfType<AudioManager>();
         mainCamera = Camera.main;
+        player = GameObject.FindGameObjectWithTag("Player");
 
         UpdateSmaller();
 
@@ -65,6 +67,7 @@ public class MenuManager : MonoBehaviour
     public void StartNow()
     {
         gameManager.isGameStarted = true;
+        player.GetComponent<Rolling>().Roll();
     }
     public void SmallerBall()
     {

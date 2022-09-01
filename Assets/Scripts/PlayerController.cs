@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
 
     public float horizontalInput;
     [SerializeField] float movementSpeed = 5;
-    [SerializeField] float rotationSpeed = 360;
+    //[SerializeField] float rotationSpeed = 360;
 
     private float xRange = 4;
 
@@ -28,12 +28,13 @@ public class PlayerController : MonoBehaviour
     private GameManager gameManager;
     private AudioManager audioManager;
     private Camera mainCamera;
+    private Rolling rolling;
     private float _direction;
     private float right = 1;
     private float left = -1;
     private float zero = 0;
     private Vector3 deltaPosition;
-    private Quaternion deltaRotation;
+    //private Quaternion deltaRotation;
     private Vector3 revivePos;
     private Vector3 reviveOffset = new Vector3(0, 0, -10);
     private PhysicMaterial bouncyMaterial;
@@ -45,12 +46,13 @@ public class PlayerController : MonoBehaviour
         audioManager = FindObjectOfType<AudioManager>();
         playerRigidbody = GetComponent<Rigidbody>();
         playerTrans = GetComponent<Transform>();
+        rolling = GetComponent<Rolling>();
         mainCamera = Camera.main;
         shotPosZ = Goal.transform.position.z - distanceFromBall;
         menu = tapToShootText.transform.parent.GetChild(0).gameObject;
         revive = tapToShootText.transform.parent.GetChild(7).gameObject;
         deltaPosition = new Vector3(0,0,forwardVelocity);
-        deltaRotation = Quaternion.Euler(rotationSpeed * Time.fixedDeltaTime * Vector3.right);
+        //deltaRotation = Quaternion.Euler(rotationSpeed * Time.fixedDeltaTime * Vector3.right);
         bouncyMaterial = gameObject.GetComponent<SphereCollider>().material;
         if (OldAdManager.Instance.isRevived)
         {
@@ -63,10 +65,12 @@ public class PlayerController : MonoBehaviour
         if (playerTrans.position.z < shotPosZ)
         {
             MovePlayer();
+            CheckPosition();
         }
-        else if (playerTrans.position.z >= shotPosZ)
+        else if (playerTrans.position.z >= shotPosZ && !isPositionOkay)
         {
             StartCoroutine(CameraPosition());
+            rolling.Stop();
             if (!isShooted)
             {
                 playerRigidbody.velocity = Vector3.zero;
@@ -74,7 +78,6 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        CheckPosition();
     }
 
     private void Update()
@@ -144,7 +147,7 @@ public class PlayerController : MonoBehaviour
             //playerRigidbody.velocity = new Vector3(horizontalInput, playerRigidbody.velocity.y, forwardVelocity);
 
             // Roll ball
-            playerRigidbody.MoveRotation(playerRigidbody.rotation * deltaRotation);
+            //playerRigidbody.MoveRotation(playerRigidbody.rotation * deltaRotation);
         }
         else if(!gameManager.isGameStarted)
         {
@@ -168,16 +171,14 @@ public class PlayerController : MonoBehaviour
         if (other.CompareTag("SmallBall"))
         {
             audioManager.Play("SmallBall");
-            transform.localScale = transform.localScale / 1.2f;
-            other.gameObject.GetComponent<Animator>().SetBool("isDestroyed", true);
-            Destroy(other.gameObject, 0.6f);
+            playerTrans.localScale = playerTrans.localScale / 1.2f;
+            other.gameObject.GetComponent<Panel>().ScaleX();
         }
         if (other.CompareTag("BigBall"))
         {
             audioManager.Play("BigBall");
-            transform.localScale = transform.localScale * 1.2f;
-            other.gameObject.GetComponent<Animator>().SetBool("isDestroyed", true);
-            Destroy(other.gameObject, 0.6f);
+            playerTrans.localScale = playerTrans.localScale * 1.2f;
+            other.gameObject.GetComponent<Panel>().ScaleX();
         }
     }
     private void OnCollisionEnter(Collision collision)
@@ -243,16 +244,16 @@ public class PlayerController : MonoBehaviour
             revivePos.z = shotPosZ - 10;
             playerRigidbody.MovePosition(revivePos);
         }
+        gameManager.AddCoin(OldAdManager.Instance.reviveCoins);
         OldAdManager.Instance.reviveCoins = 0;
         OldAdManager.Instance.isRevived = false;
         menu.SetActive(false);
         revive.SetActive(true);
-        gameManager.AddCoin(OldAdManager.Instance.reviveCoins);
     }
     IEnumerator CheckShoot()
     {
         yield return new WaitForSeconds(2);
-        while(!gameManager.gameOver && !gameManager.isLevelCompleted)
+        while (!gameManager.gameOver && !gameManager.isLevelCompleted)
         {
             gameManager.GameOver();
         }

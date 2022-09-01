@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class DetectCollision : MonoBehaviour
@@ -12,10 +10,10 @@ public class DetectCollision : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        FindObjectOfType<AudioManager>().Play("Coin");
         Destroy(gameObject);
         Instantiate(coinParticle, transform.position, transform.rotation);
         gameManager.AddCoin(1);
+        gameManager.PlayCoinSound();
         if(DataManager.Instance.isVibrationOn)
         {
             Vibrator.Vibrate(100);

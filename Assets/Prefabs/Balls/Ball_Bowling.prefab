@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 660392222906596752}
   - component: {fileID: 6682326941939912334}
   - component: {fileID: 2617934394721617761}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ball_Bowling
   m_TagString: Untagged
   m_Icon: {fileID: 0}

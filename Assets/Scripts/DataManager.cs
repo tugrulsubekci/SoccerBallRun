@@ -8,15 +8,15 @@ public class DataManager : MonoBehaviour
     public int playerIndex;
     public int coins;
     public int levelIndex;
+    public int levelNumber;
     public int largerSkill_Level;
     public int smallerSkill_Level;
     public int ballIndex;
-    public bool ball1;
-    public bool ball2;
     public bool isMusicOn = true;
     public bool isVibrationOn = true;
     public bool[] purchaseData;
     public bool[] selectData;
+    public bool isDisplayed; // for instructional object (don't save)
 
     void Awake()
     {
@@ -41,11 +41,10 @@ public class DataManager : MonoBehaviour
         public int playerIndex;
         public int coins;
         public int levelIndex;
+        public int levelNumber;
         public int largerSkill_Level;
         public int smallerSkill_Level;
         public int ballIndex;
-        public bool ball1;
-        public bool ball2;
         public bool isMusicOn;
         public bool isVibrationOn;
         public bool[] purchaseData;
@@ -58,11 +57,10 @@ public class DataManager : MonoBehaviour
         data.playerIndex = playerIndex;
         data.coins = coins;
         data.levelIndex = levelIndex;
+        data.levelNumber = levelNumber;
         data.largerSkill_Level = largerSkill_Level;
         data.smallerSkill_Level = smallerSkill_Level;
         data.ballIndex = ballIndex;
-        data.ball1 = ball1;
-        data.ball2 = ball2;
         data.isMusicOn = isMusicOn;
         data.isVibrationOn = isVibrationOn;
         data.purchaseData = purchaseData;
@@ -79,12 +77,11 @@ public class DataManager : MonoBehaviour
             SaveData data = JsonUtility.FromJson<SaveData>(json);
             coins = data.coins;
             playerIndex = data.playerIndex;
+            levelNumber = data.levelNumber;
             levelIndex = data.levelIndex;
             largerSkill_Level = data.largerSkill_Level;
             smallerSkill_Level = data.smallerSkill_Level;
             ballIndex = data.ballIndex;
-            ball1 = data.ball1;
-            ball2 = data.ball2;
             isMusicOn = data.isMusicOn;
             isVibrationOn = data.isVibrationOn;
             purchaseData = data.purchaseData;

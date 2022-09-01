@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6838477673296921639}
   - component: {fileID: 6838477673296921816}
-  - component: {fileID: 5213428364242174632}
+  - component: {fileID: 650778244}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -50,6 +50,7 @@ MonoBehaviour:
   isLevelCompleted: 0
   _coins: 0
   coinText: {fileID: 0}
+  shopCoinText: {fileID: 0}
   levelText: {fileID: 0}
   gameOverPanel: {fileID: 0}
   levelCompletedPanel: {fileID: 0}
@@ -57,7 +58,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
---- !u!114 &5213428364242174632
+--- !u!114 &650778244
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -66,8 +67,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 6838477673296921817}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ecb992c0753fd944941e92f870666d9, type: 3}
+  m_Script: {fileID: 11500000, guid: 14965fe5ac514344c8b8d511930ac475, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _androidAdUnitId: Interstitial_Android
-  _iOsAdUnitId: Interstitial_iOS

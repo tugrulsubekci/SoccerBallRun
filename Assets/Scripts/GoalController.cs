@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GoalController : MonoBehaviour
@@ -8,36 +6,49 @@ public class GoalController : MonoBehaviour
     private bool isLeft = false;
 
     [SerializeField] float moveSpeed = 2;
+    private float xBound = 3.2f;
 
     private PlayerController playerController;
-    private void Start()
+    private Rigidbody goRigidbody;
+    private Transform goTrans;
+    private Vector3 deltaPos;
+    private void Awake()
     {
+        deltaPos = new Vector3(moveSpeed * Time.fixedDeltaTime, 0,0);
+        goRigidbody = gameObject.GetComponent<Rigidbody>();
+        goTrans = transform;
         playerController = FindObjectOfType<PlayerController>();
     }
-    // Update is called once per frame
-    void Update()
+
+    void FixedUpdate()
     {
         if(playerController.isPositionOkay)
         {
             Move();
         }
     }
+
     private void Move()
     {
         if (isRight)
         {
-            gameObject.transform.Translate(moveSpeed * Time.deltaTime * Vector3.forward);
+            goRigidbody.MovePosition(goTrans.position - deltaPos);
         }
-        if (isLeft)
+        else
         {
-            gameObject.transform.Translate(moveSpeed * Time.deltaTime * Vector3.back);
+            goRigidbody.MovePosition(goTrans.position + deltaPos);
         }
-        if (transform.position.x <= -3.5)
+        CheckPosition();
+    }
+
+    private void CheckPosition()
+    {
+        if (goTrans.position.x <= -xBound)
         {
             isLeft = true;
             isRight = false;
         }
-        if (transform.position.x >= 3.5)
+        if (goTrans.position.x >= xBound)
         {
             isLeft = false;
             isRight = true;

@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2402009930594589444}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Confeties
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -45,7 +45,7 @@ GameObject:
   - component: {fileID: 2402009930855083229}
   - component: {fileID: 2402009930855083231}
   - component: {fileID: 2402009930855083230}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Confeti
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4848,7 +4848,7 @@ GameObject:
   - component: {fileID: 2402009930892006524}
   - component: {fileID: 2402009930892006526}
   - component: {fileID: 2402009930892006525}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Confeti (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9651,7 +9651,7 @@ GameObject:
   - component: {fileID: 2402009931334152843}
   - component: {fileID: 2402009931334152853}
   - component: {fileID: 2402009931334152852}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Confeti (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

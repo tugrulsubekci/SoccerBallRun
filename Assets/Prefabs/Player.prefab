@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 4244573258333931422}
   - component: {fileID: 4244573258333931420}
   - component: {fileID: 4244573258333931421}
-  m_Layer: 0
+  - component: {fileID: 3806592}
+  m_Layer: 8
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -53,7 +54,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91e58d58e3fea5c43a9615928f0b219b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  forwardVelocity: 5
+  forwardVelocity: 5.5
   horizontalInput: 0
   movementSpeed: 5
   Goal: {fileID: 0}
@@ -74,12 +75,12 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 2
+  m_CollisionDetection: 0
 --- !u!135 &4244573258333931421
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -93,6 +94,18 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.6
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3806592
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4244573258333931417}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15c80d789ff9f8a4384b157be45f054c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1917923968370846011
 PrefabInstance:
   m_ObjectHideFlags: 0

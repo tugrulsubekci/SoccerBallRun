@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
 
     public float horizontalInput;
     [SerializeField] float movementSpeed = 5;
-    private float rotationSpeed = 360;
+    [SerializeField] float rotationSpeed = 360;
 
     private float xRange = 4;
 

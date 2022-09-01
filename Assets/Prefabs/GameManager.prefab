@@ -50,6 +50,7 @@ MonoBehaviour:
   isLevelCompleted: 0
   _coins: 0
   coinText: {fileID: 0}
+  shopCoinText: {fileID: 0}
   levelText: {fileID: 0}
   gameOverPanel: {fileID: 0}
   levelCompletedPanel: {fileID: 0}

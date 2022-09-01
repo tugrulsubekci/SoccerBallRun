@@ -1691,11 +1691,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 5238846921343122224, guid: 5b2304351bd269c41a32cf843b61cc36,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5238846921343122225, guid: 5b2304351bd269c41a32cf843b61cc36,
         type: 3}
       propertyPath: m_RootOrder
@@ -2076,21 +2071,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Main Camera
-      objectReference: {fileID: 0}
-    - target: {fileID: 7393245931591843512, guid: 3e4e1c7247e3c374f90292ef28188a9f,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7393245931591843512, guid: 3e4e1c7247e3c374f90292ef28188a9f,
-        type: 3}
-      propertyPath: m_CullingMask.m_Bits
-      value: 2147483647
-      objectReference: {fileID: 0}
-    - target: {fileID: 7393245931591843514, guid: 3e4e1c7247e3c374f90292ef28188a9f,
-        type: 3}
-      propertyPath: m_CameraType
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7393245931591843515, guid: 3e4e1c7247e3c374f90292ef28188a9f,
         type: 3}

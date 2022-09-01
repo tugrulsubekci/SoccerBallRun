@@ -53,9 +53,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91e58d58e3fea5c43a9615928f0b219b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  forwardVelocity: 5
+  forwardVelocity: 5.5
   horizontalInput: 0
   movementSpeed: 5
+  rotationSpeed: 400
   Goal: {fileID: 0}
   shotPower: 50
   distanceFromBall: 15

@@ -8742,7 +8742,7 @@ GameObject:
   - component: {fileID: 5776442041027568679}
   - component: {fileID: 5776442041027568673}
   - component: {fileID: 5776442041027568672}
-  - component: {fileID: 556979886}
+  - component: {fileID: 1365590604584544491}
   m_Layer: 5
   m_Name: TapToShootText
   m_TagString: Untagged
@@ -8868,26 +8868,18 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!95 &556979886
-Animator:
-  serializedVersion: 4
+--- !u!114 &1365590604584544491
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5776442041027568678}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 5349e57a70e067a4db76495edeea58dc, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53650c25656e410498ca002fefecd676, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5776442041060864408
 GameObject:
   m_ObjectHideFlags: 0

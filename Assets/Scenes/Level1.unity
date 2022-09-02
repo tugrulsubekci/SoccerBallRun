@@ -1024,6 +1024,7 @@ MonoBehaviour:
   purchaseData: 
   selectData: 
   isDisplayed: 0
+  isInAppReviewShown: 0
 --- !u!4 &1436939144
 Transform:
   m_ObjectHideFlags: 0

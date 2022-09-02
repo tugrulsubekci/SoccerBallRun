@@ -8,9 +8,20 @@ public class InterstitialAdvertisement : MonoBehaviour
     IInterstitialAd ad;
     string adUnitId = "Interstitial_Android";
     string gameId = "4877029";
+
+    // In app review
+    private InAppReview _inAppReview;
     private void Start()
     {
         InitServices();
+        if(DataManager.Instance.levelNumber > 1 && !DataManager.Instance.isInAppReviewShown)
+        {
+            _inAppReview = gameObject.GetComponent<InAppReview>();
+        }
+        else
+        {
+            _inAppReview = null;
+        }
     }
     public async void InitServices()
     {
@@ -104,6 +115,10 @@ public class InterstitialAdvertisement : MonoBehaviour
     {
         // Debug.Log("Ad has closed");
         // Execute logic after an ad has been closed.
+        if(_inAppReview != null)
+        {
+            _inAppReview.StartReview();
+        }
     }
 
     void AdClicked(object sender, EventArgs e)

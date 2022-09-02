@@ -17,6 +17,7 @@ public class DataManager : MonoBehaviour
     public bool[] purchaseData;
     public bool[] selectData;
     public bool isDisplayed; // for instructional object (don't save)
+    public bool isInAppReviewShown;
 
     void Awake()
     {
@@ -27,7 +28,7 @@ public class DataManager : MonoBehaviour
         }
         Instance = this;
         DontDestroyOnLoad(gameObject);
-        File.Delete(Application.persistentDataPath + "/datafile.json"); // This line can be activated, If you want to delete save file.
+        // File.Delete(Application.persistentDataPath + "/datafile.json"); // This line can be activated, If you want to delete save file.
         Load();
         if (levelIndex != SceneManager.GetActiveScene().buildIndex)
         {
@@ -49,6 +50,7 @@ public class DataManager : MonoBehaviour
         public bool isVibrationOn;
         public bool[] purchaseData;
         public bool[] selectData;
+        public bool isInAppReviewShown;
     }
 
     public void Save()
@@ -65,6 +67,7 @@ public class DataManager : MonoBehaviour
         data.isVibrationOn = isVibrationOn;
         data.purchaseData = purchaseData;
         data.selectData = selectData;
+        data.isInAppReviewShown = isInAppReviewShown;
         string json = JsonUtility.ToJson(data);
         File.WriteAllText(Application.persistentDataPath + "/datafile.json", json);
     }
@@ -86,6 +89,7 @@ public class DataManager : MonoBehaviour
             isVibrationOn = data.isVibrationOn;
             purchaseData = data.purchaseData;
             selectData = data.selectData;
+            isInAppReviewShown = data.isInAppReviewShown;
         }
     }
 }

@@ -13,6 +13,11 @@ public class ReviveAdButton : MonoBehaviour
     private Button _showAdButton;
     [SerializeField] GameObject player;
     private GameManager gameManager;
+    private FBAnalyticss FBAnalyticss;
+    private void Awake()
+    {
+        FBAnalyticss = FindObjectOfType<FBAnalyticss>();
+    }
     private void Start()
     {
         InitServices();
@@ -135,6 +140,7 @@ public class ReviveAdButton : MonoBehaviour
     void UserRewarded(object sender, RewardEventArgs e)
     {
         // Debug.Log($"Received reward: type:{e.Type}; amount:{e.Amount}");
+        FBAnalyticss.LogRevivedLevelEvent("Revived Level: " + (DataManager.Instance.levelNumber + 1).ToString());
         OldAdManager.Instance.playerPos = new Vector3(0, 0.75f ,player.transform.position.z);
         OldAdManager.Instance.isRevived = true;
         OldAdManager.Instance.reviveCoins = gameManager._coins;

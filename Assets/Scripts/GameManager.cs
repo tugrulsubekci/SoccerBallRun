@@ -17,9 +17,16 @@ public class GameManager : MonoBehaviour
 
     private InterstitialAdvertisement interstitialAds;
     private AudioManager audioManager;
+    private FBAnalyticss FBAnalyticss;
     private void Awake()
     {
+#if UNITY_EDITOR
+        Debug.unityLogger.logEnabled = true;
+#else
+        Debug.unityLogger.logEnabled = false;
+#endif
         audioManager = FindObjectOfType<AudioManager>();
+        FBAnalyticss = FindObjectOfType<FBAnalyticss>();
     }
     private void Start()
     {
@@ -86,6 +93,7 @@ public class GameManager : MonoBehaviour
         DataManager.Instance.levelIndex++;
         DataManager.Instance.levelNumber++;
         DataManager.Instance.Save();
+        FBAnalyticss.LogAchievedLevelEvent("Level " + DataManager.Instance.levelNumber.ToString());
     }
     public void Revive()
     {

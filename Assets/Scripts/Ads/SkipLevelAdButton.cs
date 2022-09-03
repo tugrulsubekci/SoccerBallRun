@@ -11,6 +11,11 @@ public class SkipLevelAdButton : MonoBehaviour
     string adUnitId = "Rewarded_Android";
     string gameId = "4877029";
     private Button showAdButton;
+    private FBAnalyticss FBAnalyticss;
+    private void Awake()
+    {
+        FBAnalyticss = FindObjectOfType<FBAnalyticss>();
+    }
     private void Start()
     {
         InitServices();
@@ -132,6 +137,7 @@ public class SkipLevelAdButton : MonoBehaviour
     void UserRewarded(object sender, RewardEventArgs e)
     {
         // Debug.Log($"Received reward: type:{e.Type}; amount:{e.Amount}");
+        FBAnalyticss.LogSkippedLevelEvent("Skipped Level: " + (DataManager.Instance.levelNumber + 1).ToString());
         DataManager.Instance.levelIndex++;
         DataManager.Instance.levelNumber++;
         DataManager.Instance.Save();

@@ -30,6 +30,10 @@ public class DataManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
         // File.Delete(Application.persistentDataPath + "/datafile.json"); // This line can be activated, If you want to delete save file.
         Load();
+
+    }
+    private void Start()
+    {
         if (levelIndex != SceneManager.GetActiveScene().buildIndex)
         {
             SceneManager.LoadScene(levelIndex);

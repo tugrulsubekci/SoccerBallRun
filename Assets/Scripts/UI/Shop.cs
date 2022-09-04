@@ -2,15 +2,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using System.Linq;
 
 public class Shop : MonoBehaviour
 {
     [System.Serializable] public class Item
     {
-        public Sprite image;
+        public Mesh mesh;
+        public Material[] materials;
         public int price;
         public bool isPurchased = false;
         public bool isSelected = false;
+        public Vector3 scale;
     }
     [SerializeField] List<Item> Items;
     private GameObject itemTemplate;
@@ -23,6 +26,7 @@ public class Shop : MonoBehaviour
 
     private GameManager gameManager;
     private Transform player;
+    public Material _material;
 
     // Start is called before the first frame update
     void Start()
@@ -37,7 +41,16 @@ public class Shop : MonoBehaviour
         for (int i = 0; i < leng; i++)
         {
             g = Instantiate(itemTemplate, content);
-            g.transform.GetChild(1).GetComponent<Image>().sprite = Items[i].image;
+            g.transform.GetChild(1).GetComponent<MeshFilter>().sharedMesh = Items[i].mesh;
+            g.transform.GetChild(1).transform.localScale = Items[i].scale;
+
+            List<Material> listMaterial = new List<Material>();
+            for (int a = 0; a < Items[i].materials.Length; a++)
+            {
+                listMaterial.Add(Items[i].materials[a]);
+            }
+            g.transform.GetChild(1).GetComponent<Renderer>().materials = listMaterial.ToArray();
+
             g.transform.GetChild(2).GetChild(1).GetComponent<TextMeshProUGUI>().text = Items[i].price.ToString();
             buyButton = g.transform.GetChild(3).GetComponent<Button>();
             buyButton.interactable = !Items[i].isPurchased;

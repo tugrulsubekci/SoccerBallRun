@@ -1013,9 +1013,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerIndex: 0
-  coins: 0
-  levelIndex: 0
-  levelNumber: 0
+  coins: 150
+  levelIndex: 9
+  levelNumber: 9
   largerSkill_Level: 0
   smallerSkill_Level: 0
   ballIndex: 0

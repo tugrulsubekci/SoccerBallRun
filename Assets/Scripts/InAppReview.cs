@@ -9,6 +9,15 @@ public class InAppReview : MonoBehaviour
     private void Start()
     {
         _reviewManager = new ReviewManager();
+        if(DataManager.Instance.levelNumber == 2)
+        {
+            StartCoroutine(nameof(Review));
+        }
+        else
+        {
+            this.enabled = false;
+        }
+
     }
     public IEnumerator Review()
     {
@@ -36,9 +45,5 @@ public class InAppReview : MonoBehaviour
         // The flow has finished. The API does not indicate whether the user
         // reviewed or not, or even whether the review dialog was shown. Thus, no
         // matter the result, we continue our app flow.
-    }
-    public void StartReview()
-    {
-        StartCoroutine(nameof(Review));
     }
 }

@@ -115,10 +115,6 @@ public class InterstitialAdvertisement : MonoBehaviour
     {
         // Debug.Log("Ad has closed");
         // Execute logic after an ad has been closed.
-        if(_inAppReview != null)
-        {
-            _inAppReview.StartReview();
-        }
     }
 
     void AdClicked(object sender, EventArgs e)

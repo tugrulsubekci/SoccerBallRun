@@ -1,5 +1,5 @@
-using UnityEngine.UI;
 using System;
+using UnityEngine.UI;
 
 public static class ButtonExtension
 {

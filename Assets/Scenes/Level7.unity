@@ -241,12 +241,12 @@ PrefabInstance:
     - target: {fileID: 1340750403758835486, guid: 2215f8623a72b4048bc97f07591e446f,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 7.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1340750403758835486, guid: 2215f8623a72b4048bc97f07591e446f,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -9
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1340750403758835486, guid: 2215f8623a72b4048bc97f07591e446f,
         type: 3}
@@ -603,6 +603,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2294961610183653008, guid: 9f62d37ffe26f4d4da14235d6c8fd409,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 7.4976625
+      objectReference: {fileID: 0}
+    - target: {fileID: 2294961610183653008, guid: 9f62d37ffe26f4d4da14235d6c8fd409,
+        type: 3}
+      propertyPath: m_Center.x
+      value: -0.7488507
+      objectReference: {fileID: 0}
+    - target: {fileID: 2294961610183653008, guid: 9f62d37ffe26f4d4da14235d6c8fd409,
+        type: 3}
+      propertyPath: m_Center.z
+      value: 7.734312e-15
+      objectReference: {fileID: 0}
     - target: {fileID: 9044733740163907577, guid: 9f62d37ffe26f4d4da14235d6c8fd409,
         type: 3}
       propertyPath: m_Name
@@ -668,6 +683,12 @@ PrefabInstance:
 --- !u!1 &1769671100 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8276724361878829681, guid: 9f62d37ffe26f4d4da14235d6c8fd409,
+    type: 3}
+  m_PrefabInstance: {fileID: 1769671099}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1769671101 stripped
+BoxCollider:
+  m_CorrespondingSourceObject: {fileID: 2294961610183653008, guid: 9f62d37ffe26f4d4da14235d6c8fd409,
     type: 3}
   m_PrefabInstance: {fileID: 1769671099}
   m_PrefabAsset: {fileID: 0}
@@ -765,6 +786,11 @@ PrefabInstance:
       objectReference: {fileID: 1769671100}
     - target: {fileID: 4244573258333931422, guid: 722f9545c0d244b4682c23c5c09e0204,
         type: 3}
+      propertyPath: coll
+      value: 
+      objectReference: {fileID: 1769671101}
+    - target: {fileID: 4244573258333931422, guid: 722f9545c0d244b4682c23c5c09e0204,
+        type: 3}
       propertyPath: tapToShootText
       value: 
       objectReference: {fileID: 556979882}
@@ -786,7 +812,7 @@ PrefabInstance:
     - target: {fileID: 4244573258333931423, guid: 722f9545c0d244b4682c23c5c09e0204,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4244573258333931423, guid: 722f9545c0d244b4682c23c5c09e0204,
         type: 3}

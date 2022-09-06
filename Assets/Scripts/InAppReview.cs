@@ -9,7 +9,7 @@ public class InAppReview : MonoBehaviour
     private void Start()
     {
         _reviewManager = new ReviewManager();
-        if(DataManager.Instance.levelNumber == 2)
+        if (DataManager.Instance.levelNumber == 2)
         {
             StartCoroutine(nameof(Review));
         }

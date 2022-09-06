@@ -1,12 +1,12 @@
 using System.Collections.Generic;
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
-using System.Linq;
 
 public class Shop : MonoBehaviour
 {
-    [System.Serializable] public class Item
+    [System.Serializable]
+    public class Item
     {
         public Mesh mesh;
         public Material[] materials;
@@ -82,7 +82,7 @@ public class Shop : MonoBehaviour
 
     void OnShopItemBtnClicked(int itemIndex)
     {
-        if(gameManager.HasEnoughCoins(Items[itemIndex].price))
+        if (gameManager.HasEnoughCoins(Items[itemIndex].price))
         {
             FindObjectOfType<AudioManager>().Play("Click");
             Items[itemIndex].isPurchased = true;
@@ -119,8 +119,8 @@ public class Shop : MonoBehaviour
 
         bool[] selected = new bool[leng];
         bool[] purchased = new bool[leng];
-        
-        for (int i = 0; i < leng;i++)
+
+        for (int i = 0; i < leng; i++)
         {
             selected[i] = Items[i].isSelected;
         }
@@ -137,7 +137,7 @@ public class Shop : MonoBehaviour
 
     void LoadShopData()
     {
-        if(DataManager.Instance.purchaseData.Length != 0)
+        if (DataManager.Instance.purchaseData.Length != 0)
         {
             int leng = Items.Count;
             for (int i = 0; i < leng; i++)

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4244573258333931423}
   - component: {fileID: 4244573258333931422}
-  - component: {fileID: 4244573258333931420}
+  - component: {fileID: 4565852032486044368}
   - component: {fileID: 4244573258333931421}
   - component: {fileID: 3806592}
   m_Layer: 8
@@ -65,7 +65,7 @@ MonoBehaviour:
   tapToShootText: {fileID: 0}
   explosionParticle: {fileID: 7535607469619513247, guid: 332bfa52a3b079a41a5f18315cd9c8e9,
     type: 3}
---- !u!54 &4244573258333931420
+--- !u!54 &4565852032486044368
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

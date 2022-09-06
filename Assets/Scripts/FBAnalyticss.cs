@@ -1,7 +1,7 @@
-using UnityEngine;
-using GameAnalyticsSDK;
 using Facebook.Unity;
+using GameAnalyticsSDK;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class FBAnalyticss : MonoBehaviour
 {

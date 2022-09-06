@@ -25,7 +25,7 @@ public class AudioManager : MonoBehaviour
     }
     public void Play(string name)
     {
-        if(DataManager.Instance.isMusicOn == true)
+        if (DataManager.Instance.isMusicOn == true)
         {
             Sound s = Array.Find(sounds, sound => sound.name == name);
             s.source.Play();

@@ -11,7 +11,7 @@ public class Rotator : MonoBehaviour
         goTrans = transform;
         zeroQ = Quaternion.Euler(Vector3.zero);
         goTrans.rotation = zeroQ;
-        goTrans.DORotate(_eulerAngles,10,RotateMode.FastBeyond360).SetLoops(-1).SetEase(Ease.Linear);
+        goTrans.DORotate(_eulerAngles, 10, RotateMode.FastBeyond360).SetLoops(-1).SetEase(Ease.Linear);
     }
     private void OnDisable()
     {

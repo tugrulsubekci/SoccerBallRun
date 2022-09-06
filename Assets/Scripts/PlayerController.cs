@@ -7,10 +7,7 @@ public class PlayerController : MonoBehaviour
     private Transform playerTrans;
     [SerializeField] float forwardVelocity = 3;
 
-    public float horizontalInput;
-    [SerializeField] float movementSpeed = 5;
-
-    private float xRange = 4;
+    private float xRange = 3.5f;
 
     [SerializeField] GameObject Goal;
     [SerializeField] float shotPower;
@@ -19,7 +16,6 @@ public class PlayerController : MonoBehaviour
     public bool isPositionOkay;
     public bool isShooted;
     private bool isTriggeredSoon;
-    private bool outOfBounds;
 
     private bool isCameraPositionOkay;
     [SerializeField] GameObject tapToShootText;
@@ -30,15 +26,19 @@ public class PlayerController : MonoBehaviour
     private AudioManager audioManager;
     private Camera mainCamera;
     private Rolling rolling;
-    private float _direction;
-    private float right = 1;
-    private float left = -1;
-    private float zero = 0;
-    private Vector3 deltaPosition;
+
     private Vector3 revivePos;
     private Vector3 reviveOffset = new Vector3(0, 0, -10);
+
     private PhysicMaterial bouncyMaterial;
     [SerializeField] ParticleSystem explosionParticle;
+
+    //new movement mechanic
+    private Vector3 newPos;
+    private float xPos;
+    private float _moveFactorX;
+    private float _lastFrameFingerPositionX;
+    private int screenWidth;
 
     void Start()
     {
@@ -51,11 +51,24 @@ public class PlayerController : MonoBehaviour
         shotPosZ = Goal.transform.position.z - distanceFromBall;
         menu = tapToShootText.transform.parent.GetChild(0).gameObject;
         revive = tapToShootText.transform.parent.GetChild(7).gameObject;
-        deltaPosition = new Vector3(0,0,forwardVelocity);
         bouncyMaterial = gameObject.GetComponent<SphereCollider>().material;
+
+        screenWidth = Screen.width;
         if (OldAdManager.Instance.isRevived)
         {
             Revive();
+        }
+    }
+
+    private void Update()
+    {
+        if (gameManager.isGameStarted)
+        {
+            GetFingerPos();
+        }
+        if (isPositionOkay && !isShooted)
+        {
+            HandleShoot();
         }
     }
 
@@ -75,66 +88,69 @@ public class PlayerController : MonoBehaviour
                 isPositionOkay = true;
             }
         }
-
-    }
-
-    private void Update()
-    {
-        if (Input.GetMouseButton(0))
-        {
-            if (Input.mousePosition.x > mainCamera.WorldToScreenPoint(playerTrans.position).x)
-            {
-                _direction = right;
-            }
-            else if (Input.mousePosition.x < mainCamera.WorldToScreenPoint(playerTrans.position).x)
-            {
-                _direction = left;
-            }
-            else
-            {
-                _direction = zero;
-            }
-        }
-        else
-        {
-            _direction = zero;
-        }
-
-        if (isPositionOkay && !isShooted)
-        {
-            if(playerRigidbody.collisionDetectionMode != CollisionDetectionMode.ContinuousDynamic)
-            {
-                playerRigidbody.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
-            }
-            if (Input.GetMouseButtonDown(0) && isCameraPositionOkay)
-            {
-                bouncyMaterial.bounciness = 0;
-                audioManager.Play("Shoot");
-                playerRigidbody.AddForce(Vector3.forward * shotPower, ForceMode.Impulse);
-                isShooted = true;
-                StartCoroutine(CheckShoot());
-            }
-        }
     }
     void MovePlayer()
     {
         if (gameManager.isGameStarted)
         {
-            //Move Ball
-            horizontalInput = _direction * movementSpeed;
-            if(playerTrans.position.x >= xRange && _direction > 0)
+            xPos = _moveFactorX * xRange * 2 / screenWidth;
+
+            newPos = new Vector3(playerTrans.position.x + xPos, playerTrans.position.y, playerTrans.position.z + Time.fixedDeltaTime * forwardVelocity);
+            if (playerTrans.position.x + xPos > xRange)
             {
-                deltaPosition.x = zero;
+                newPos.x = xRange;
             }
-            else if (playerTrans.position.x <= -xRange && _direction < 0)
+            else if (playerTrans.position.x + xPos < -xRange)
             {
-                deltaPosition.x = zero;
+                newPos.x = -xRange;
             }
-            else
-            {
-                deltaPosition.x = horizontalInput;
-            }
-            playerRigidbody.MovePosition(playerTrans.position + Time.fixedDeltaTime * deltaPosition);
+
+            playerRigidbody.MovePosition(newPos);
+        }
+    }
+    private void GetFingerPos()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            _lastFrameFingerPositionX = Input.mousePosition.x;
+            CheckFingerPos();
+        }
+        else if (Input.GetMouseButton(0))
+        {
+            _moveFactorX = Input.mousePosition.x - _lastFrameFingerPositionX;
+            _lastFrameFingerPositionX = Input.mousePosition.x;
+            CheckFingerPos();
+        }
+        else if (Input.GetMouseButtonUp(0))
+        {
+            _moveFactorX = 0f;
+        }
+    }
+    private void CheckFingerPos()
+    {
+        if (_lastFrameFingerPositionX > screenWidth)
+        {
+            _lastFrameFingerPositionX = screenWidth;
+        }
+        else if (_lastFrameFingerPositionX < 0)
+        {
+            _lastFrameFingerPositionX = 0;
+        }
+    }
+
+    private void HandleShoot()
+    {
+        if (playerRigidbody.collisionDetectionMode != CollisionDetectionMode.ContinuousDynamic)
+        {
+            playerRigidbody.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
+        }
+        if (Input.GetMouseButtonDown(0) && isCameraPositionOkay)
+        {
+            bouncyMaterial.bounciness = 0;
+            audioManager.Play("Shoot");
+            playerRigidbody.AddForce(Vector3.forward * shotPower, ForceMode.Impulse);
+            isShooted = true;
+            StartCoroutine(CheckShoot());
         }
     }
     private void OnTriggerEnter(Collider other)
@@ -215,11 +231,11 @@ public class PlayerController : MonoBehaviour
             }
         }
         revivePos = OldAdManager.Instance.playerPos + reviveOffset;
-        if(revivePos.z < shotPosZ)
+        if (revivePos.z < shotPosZ)
         {
             playerRigidbody.MovePosition(revivePos);
         }
-        else if(revivePos.z >= shotPosZ)
+        else if (revivePos.z >= shotPosZ)
         {
             revivePos.z = shotPosZ - 10;
             playerRigidbody.MovePosition(revivePos);

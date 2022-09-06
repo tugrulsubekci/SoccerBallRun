@@ -14,7 +14,7 @@ public class GoalController : MonoBehaviour
     private Vector3 deltaPos;
     private void Awake()
     {
-        deltaPos = new Vector3(moveSpeed * Time.fixedDeltaTime, 0,0);
+        deltaPos = new Vector3(moveSpeed * Time.fixedDeltaTime, 0, 0);
         goRigidbody = gameObject.GetComponent<Rigidbody>();
         goTrans = transform;
         playerController = FindObjectOfType<PlayerController>();
@@ -22,7 +22,7 @@ public class GoalController : MonoBehaviour
 
     void FixedUpdate()
     {
-        if(playerController.isPositionOkay)
+        if (playerController.isPositionOkay)
         {
             Move();
         }

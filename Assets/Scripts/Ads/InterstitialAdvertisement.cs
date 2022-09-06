@@ -13,8 +13,12 @@ public class InterstitialAdvertisement : MonoBehaviour
     private InAppReview _inAppReview;
     private void Start()
     {
-        InitServices();
-        if(DataManager.Instance.levelNumber > 1 && !DataManager.Instance.isInAppReviewShown)
+        if(!DataManager.Instance.noAds)
+        {
+            InitServices();
+        }
+
+        if (DataManager.Instance.levelNumber > 1 && !DataManager.Instance.isInAppReviewShown)
         {
             _inAppReview = gameObject.GetComponent<InAppReview>();
         }

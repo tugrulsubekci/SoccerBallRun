@@ -1,5 +1,5 @@
-using UnityEngine;
 using System.IO;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class DataManager : MonoBehaviour
@@ -16,8 +16,8 @@ public class DataManager : MonoBehaviour
     public bool isVibrationOn = true;
     public bool[] purchaseData;
     public bool[] selectData;
-    public bool isDisplayed; // for instructional object (don't save)
     public bool isInAppReviewShown;
+    public bool noAds;
 
     void Awake()
     {
@@ -55,6 +55,7 @@ public class DataManager : MonoBehaviour
         public bool[] purchaseData;
         public bool[] selectData;
         public bool isInAppReviewShown;
+        public bool noAds;
     }
 
     public void Save()
@@ -72,6 +73,7 @@ public class DataManager : MonoBehaviour
         data.purchaseData = purchaseData;
         data.selectData = selectData;
         data.isInAppReviewShown = isInAppReviewShown;
+        data.noAds = noAds;
         string json = JsonUtility.ToJson(data);
         File.WriteAllText(Application.persistentDataPath + "/datafile.json", json);
     }
@@ -94,6 +96,7 @@ public class DataManager : MonoBehaviour
             purchaseData = data.purchaseData;
             selectData = data.selectData;
             isInAppReviewShown = data.isInAppReviewShown;
+            noAds = data.noAds;
         }
     }
 }

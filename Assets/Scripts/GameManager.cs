@@ -1,5 +1,5 @@
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
@@ -87,8 +87,10 @@ public class GameManager : MonoBehaviour
             confeties[i].Play();
         }
 
-        interstitialAds.ShowAd();
-
+        if(!DataManager.Instance.noAds)
+        {
+            interstitialAds.ShowAd();
+        }
         DataManager.Instance.coins += _coins;
         DataManager.Instance.levelIndex++;
         DataManager.Instance.levelNumber++;

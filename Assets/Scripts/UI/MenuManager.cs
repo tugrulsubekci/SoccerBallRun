@@ -1,11 +1,10 @@
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
 {
-    [SerializeField] GameObject instructionalObjects;
-    [SerializeField] GameObject menuObjects;
+    [SerializeField] public GameObject menuObjects;
     [SerializeField] GameObject ball;
     [SerializeField] GameObject goal;
     [SerializeField] GameObject settingsObjects;
@@ -23,14 +22,15 @@ public class MenuManager : MonoBehaviour
     private int largerGoalLevel = 1;
     private int smallerBallCost;
     private int largerGoalCost;
+    private float scaleMultiplier = 1.025f;
 
-    private GameManager gameManager;
-    private AudioManager audioManager;
+    public GameManager gameManager;
+    public AudioManager audioManager;
     private Camera mainCamera;
-    private GameObject player;
+    public GameObject player;
     private void Awake()
     {
-        shopPanel.SetActive(true);    
+        shopPanel.SetActive(true);
     }
     private void Start()
     {
@@ -43,7 +43,7 @@ public class MenuManager : MonoBehaviour
 
         UpdateLarger();
 
-        if(DataManager.Instance.isMusicOn)
+        if (DataManager.Instance.isMusicOn)
         {
             mute.SetActive(false);
         }
@@ -53,34 +53,18 @@ public class MenuManager : MonoBehaviour
         }
 
     }
-    public void StartGame()
-    {
-        audioManager.Play("Start");        
-        if (DataManager.Instance.levelNumber == 0 && !DataManager.Instance.isDisplayed)
-        {
-            DataManager.Instance.isDisplayed = true;
-            instructionalObjects.SetActive(true);
-        }
-        menuObjects.SetActive(false);
-        Invoke(nameof(StartNow), 0.5f);
-    }
-    public void StartNow()
-    {
-        gameManager.isGameStarted = true;
-        player.GetComponent<Rolling>().Roll();
-    }
     public void SmallerBall()
     {
         if (gameManager.HasEnoughCoins(smallerBallCost))
         {
-            ball.transform.localScale /= 1.05f;
+            ball.transform.localScale /= scaleMultiplier;
 
             smallerBallLevel++;
             smallerBallLevelText.text = $"LEVEL {smallerBallLevel}";
 
             gameManager.BuyItem(smallerBallCost);
             LevelUp(nameof(SmallerBall));
-            
+
 
             smallerBallCost = smallerBallLevel * 10;
             smallerBallCostText.text = smallerBallCost.ToString();
@@ -91,7 +75,7 @@ public class MenuManager : MonoBehaviour
     {
         if (gameManager.HasEnoughCoins(largerGoalCost))
         {
-            goal.transform.localScale *= 1.05f;
+            goal.transform.localScale *= scaleMultiplier;
 
             largerGoalLevel++;
             largerGoalLevelText.text = $"LEVEL {largerGoalLevel}";
@@ -109,7 +93,7 @@ public class MenuManager : MonoBehaviour
     }
     public void NextLevel()
     {
-        if(DataManager.Instance.levelIndex < 10)
+        if (DataManager.Instance.levelIndex < 10)
         {
             SceneManager.LoadScene(DataManager.Instance.levelIndex);
         }
@@ -165,7 +149,7 @@ public class MenuManager : MonoBehaviour
     public void ShopButton()
     {
         audioManager.Play("Click");
-        if(!shopPanel.activeInHierarchy)
+        if (!shopPanel.activeInHierarchy)
         {
             shopPanel.SetActive(true);
             menuObjects.SetActive(false);
@@ -203,7 +187,7 @@ public class MenuManager : MonoBehaviour
         smallerBallCostText.text = smallerBallCost.ToString();
         for (int i = 0; i < smallerBallLevel; i++)
         {
-            ball.transform.localScale /= 1.05f;
+            ball.transform.localScale /= scaleMultiplier;
         }
     }
 
@@ -215,7 +199,7 @@ public class MenuManager : MonoBehaviour
         largerGoalLevelText.text = $"LEVEL {largerGoalLevel}";
         for (int i = 0; i < largerGoalLevel; i++)
         {
-            goal.transform.localScale *= 1.05f;
+            goal.transform.localScale *= scaleMultiplier;
         }
     }
 }

@@ -6,6 +6,7 @@ public class OldAdManager : MonoBehaviour
     public bool isRevived;
     public Vector3 playerPos;
     public int reviveCoins;
+    public Vector3 playerScale;
 
     void Awake()
     {

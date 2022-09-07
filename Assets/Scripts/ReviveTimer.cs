@@ -11,7 +11,7 @@ public class ReviveTimer : MonoBehaviour
 
     void OnEnable()
     {
-        holdAndMove = transform.parent.GetComponent<HoldAndMove>();
+        holdAndMove = transform.parent.GetChild(0).GetChild(0).GetComponent<HoldAndMove>();
         timerText = GetComponent<TextMeshProUGUI>();
         StartCoroutine(ReviveTime());
     }

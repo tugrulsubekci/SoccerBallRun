@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using UnityEngine;
 
@@ -8,11 +9,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float forwardVelocity = 3;
 
     private float xRange = 3.5f;
+    private float duration = 0.5f;
 
     [SerializeField] GameObject Goal;
     [SerializeField] float shotPower;
     private float shotPosZ;
     [SerializeField] float distanceFromBall = 15;
+    private float scaleMultiplier = 1.25f;
     public bool isPositionOkay;
     public bool isShooted;
     private bool isTriggeredSoon;
@@ -40,6 +43,13 @@ public class PlayerController : MonoBehaviour
     private float _lastFrameFingerPositionX;
     private int screenWidth;
 
+    // for shoot
+    private SphereCollider sphereColl;
+    private BoxCollider boxColl;
+    private Rigidbody goalPostRb;
+    private Rigidbody goalRb;
+
+
     void Start()
     {
         gameManager = FindObjectOfType<GameManager>();
@@ -51,8 +61,11 @@ public class PlayerController : MonoBehaviour
         shotPosZ = Goal.transform.position.z - distanceFromBall;
         menu = tapToShootText.transform.parent.GetChild(0).gameObject;
         revive = tapToShootText.transform.parent.GetChild(7).gameObject;
-        bouncyMaterial = gameObject.GetComponent<SphereCollider>().material;
-
+        sphereColl = GetComponent<SphereCollider>();
+        boxColl = GetComponent<BoxCollider>();
+        bouncyMaterial = boxColl.material;
+        goalPostRb = Goal.GetComponent<Rigidbody>();
+        goalRb = Goal.transform.GetChild(2).GetComponent<Rigidbody>();
         screenWidth = Screen.width;
         if (OldAdManager.Instance.isRevived)
         {
@@ -140,9 +153,14 @@ public class PlayerController : MonoBehaviour
 
     private void HandleShoot()
     {
-        if (playerRigidbody.collisionDetectionMode != CollisionDetectionMode.ContinuousDynamic)
+        if (playerRigidbody.collisionDetectionMode != CollisionDetectionMode.Continuous)
         {
-            playerRigidbody.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
+            playerTrans.rotation = Quaternion.Euler(Vector3.zero);
+            playerRigidbody.collisionDetectionMode = CollisionDetectionMode.Continuous;
+            boxColl.enabled = true;
+            sphereColl.enabled = false;
+            goalPostRb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
+            goalRb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
         }
         if (Input.GetMouseButtonDown(0) && isCameraPositionOkay)
         {
@@ -158,7 +176,8 @@ public class PlayerController : MonoBehaviour
         if (other.CompareTag("SmallBall") && !isTriggeredSoon)
         {
             audioManager.Play("SmallBall");
-            playerTrans.localScale = playerTrans.localScale / 1.2f;
+            // playerTrans.localScale = playerTrans.localScale / scaleMultiplier;
+            playerTrans.DOScale(playerTrans.localScale / scaleMultiplier, duration).SetEase(Ease.InOutBack);
             other.gameObject.GetComponent<Panel>().ScaleX();
             isTriggeredSoon = true;
             Invoke(nameof(Trigger), 1);
@@ -166,7 +185,8 @@ public class PlayerController : MonoBehaviour
         if (other.CompareTag("BigBall") && !isTriggeredSoon)
         {
             audioManager.Play("BigBall");
-            playerTrans.localScale = playerTrans.localScale * 1.2f;
+            // playerTrans.localScale = playerTrans.localScale * scaleMultiplier;
+            playerTrans.DOScale(playerTrans.localScale * scaleMultiplier, duration).SetEase(Ease.InOutBack);
             other.gameObject.GetComponent<Panel>().ScaleX();
             isTriggeredSoon = true;
             Invoke(nameof(Trigger), 1);
@@ -240,6 +260,7 @@ public class PlayerController : MonoBehaviour
             revivePos.z = shotPosZ - 10;
             playerRigidbody.MovePosition(revivePos);
         }
+        playerTrans.localScale = OldAdManager.Instance.playerScale;
         gameManager.AddCoin(OldAdManager.Instance.reviveCoins);
         OldAdManager.Instance.reviveCoins = 0;
         OldAdManager.Instance.isRevived = false;

@@ -185,7 +185,7 @@ public class MenuManager : MonoBehaviour
         smallerBallCost = smallerBallLevel * 10;
         smallerBallLevelText.text = $"LEVEL {smallerBallLevel}";
         smallerBallCostText.text = smallerBallCost.ToString();
-        for (int i = 0; i < smallerBallLevel; i++)
+        for (int i = 0; i < smallerBallLevel - 1; i++)
         {
             ball.transform.localScale /= scaleMultiplier;
         }
@@ -197,7 +197,7 @@ public class MenuManager : MonoBehaviour
         largerGoalCost = largerGoalLevel * 10;
         largerGoalCostText.text = largerGoalCost.ToString();
         largerGoalLevelText.text = $"LEVEL {largerGoalLevel}";
-        for (int i = 0; i < largerGoalLevel; i++)
+        for (int i = 0; i < largerGoalLevel - 1; i++)
         {
             goal.transform.localScale *= scaleMultiplier;
         }
